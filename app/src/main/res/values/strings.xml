@@ -3,7 +3,7 @@
 
 
     //Id Card Dummy Data
-    <string name="name">Adlu Rahman</string>
+    <string name="id_name">Adlu Rahman</string>
     <string name="id">MBT1208</string>
     <string name="clas">CSE2021</string>
     <string name="adno">Admission No   :</string>
@@ -14,5 +14,24 @@
     <string name="dobd1">06/05/2002</string>
     <string name="bldgrpd1">RED </string>
     <string name="phoned1">9876543210</string>
-    //Idcard Dummy data End
+
+    //Wifi Slip Dummy Data
+    <string name="itms_top_bar">Wifi Access Slip</string>
+    <string name="name_field">Name</string>
+    <string name="name_value">Rick Astley</string>
+    <string name="class_field">Class</string>
+    <string name="class_value">Computer Science 1</string>
+    <string name="sem_field">Semester</string>
+    <string name="sem_value">5</string>
+    <string name="id_field">Student ID</string>
+    <string name="id_value">B20CS1169</string>
+    <string name="dname_field">Device Name</string>
+    <string name="dname_value">Predator Helios 300</string>
+    <string name="dbrand_field">Device Brand</string>
+    <string name="dbrand_value">Acer</string>
+    <string name="dtype_field">Device Type</string>
+    <string name="dtype_value">Laptop</string>
+    <string name="mac_field">MAC ID</string>
+    <string name="mac_value">54–42–10–BC-31-69</string>
+
 </resources>
