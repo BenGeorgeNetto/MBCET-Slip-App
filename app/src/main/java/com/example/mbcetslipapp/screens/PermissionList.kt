@@ -28,16 +28,6 @@ import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
 fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        /*Button(onClick = {
-            if(slipUiState.userType=="Student")
-                listslipViewModel.updateUserType("HoD")
-            else
-                listslipViewModel.updateUserType("Student")
-        },
-            modifier = Modifier,
-            colors = ButtonDefaults.buttonColors(backgroundColor = PrimBlue)){
-            Text("Switch")
-        }*/
         Row(modifier = Modifier.padding(8.dp)) {
             Button(onClick = {
                 listSlipViewModel.updateSelection("Requested")
@@ -108,14 +98,14 @@ fun SlipItem(slip: Slip, modifier: Modifier = Modifier, userType: String) {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                SlipData(stringResource(id = slip.name), stringResource(id = slip.title), stringResource(id = slip.slipType),userType = userType)
+                SlipData(stringResource(id = slip.name), slip.title, stringResource(id = slip.slipType),userType = userType)
                 Spacer(Modifier.weight(1f))
                 ExpandButton(expanded = expanded, onClick = {expanded = !expanded})
             }
             if (expanded) {
                 Column() {
                     SlipInfo(slip, userType)
-                    SlipDescription(stringResource(id = slip.slipDescribe))
+                    SlipDescription(slip.slipDescribe)
                 }
                 Spacer(Modifier.weight(1f))
                 if((userType == "Advisor" || userType == "HoD") && !slip.status.value)

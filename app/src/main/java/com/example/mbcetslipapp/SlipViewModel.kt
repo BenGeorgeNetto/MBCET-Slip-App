@@ -1,4 +1,4 @@
-package com.example.mbcetslipapp.screens
+package com.example.mbcetslipapp
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -20,6 +20,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -28,6 +29,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mbcetslipapp.R
+import com.example.mbcetslipapp.SlipViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,7 +42,7 @@ fun SlipCreateTopBar() {
         contentColor = Color.White,
         title = {
             Text(
-                text = "Create a Slip",
+                text = stringResource(R.string.CreateASlip),
             )
         },
         navigationIcon = {
@@ -98,7 +101,7 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "Fill up slip details",
+                    text = stringResource(R.string.FillUpSlipDetails),
                     fontWeight = FontWeight.Bold,
                     color = Color.Gray
                 )
@@ -108,12 +111,12 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "Name",
+                    text = stringResource(R.string.Name),
                     fontWeight = FontWeight.Bold,
                     color = Color.Gray
                 )
                 Text(
-                    text = "Arnorld Sivasankaran",
+                    text = stringResource(id =R.string.id_name),
                     fontWeight = FontWeight.Bold,
                 )
                 Spacer(modifier = Modifier.height(20.dp))
@@ -123,12 +126,12 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 ) {
                     Column(Modifier.weight(1f)) {
                         Text(
-                            text = "RegNo",
+                            text = stringResource(R.string.RegNo),
                             fontWeight = FontWeight.Bold,
                             color = Color.Gray
                         )
                         Text(
-                            text = "MBT69420",
+                            text = stringResource(id =R.string.id),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -138,12 +141,12 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                     ) {
                         Column {
                             Text(
-                                text = "AdmnNo",
+                                text = stringResource(R.string.AdmnNo),
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Gray
                             )
                             Text(
-                                text = "69420",
+                                text = stringResource(id = R.string.adnod1),
                                 fontWeight = FontWeight.Bold,
                             )
                         }
@@ -156,13 +159,13 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 ) {
                     Column(Modifier.weight(1f)) {
                         Text(
-                            text = "Class",
+                            text = stringResource(R.string.ClassTitle),
                             fontWeight = FontWeight.Bold,
                             color = Color.Gray
                         )
                         Text(
-                            text = "CS2",
-                            fontWeight = FontWeight.Bold,
+                            text = stringResource(R.string.CS1),
+                            fontWeight = FontWeight.Bold
                         )
                     }
                     Box(
@@ -171,12 +174,12 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                     ) {
                         Column {
                             Text(
-                                text = "Semester",
+                                text = stringResource(R.string.SemesterTitle),
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Gray
                             )
                             Text(
-                                text = "S3",
+                                text = stringResource(R.string.semester),
                                 fontWeight = FontWeight.Bold,
                             )
                         }
@@ -203,7 +206,7 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 InputFields(model)
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "*This slip will submitted for approval to your department faculties",
+                    text = stringResource(R.string.CreateSlipFooter),
                     textAlign = TextAlign.Center,
                     color = Color.Gray,
                     fontSize = 12.sp,
@@ -277,19 +280,19 @@ fun TypeSelectorDropdown() {
                 expanded = false
                 selected = "Gate Pass"
             }) {
-                Text("Gate Pass")
+                Text(stringResource(R.string.GatePass))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
                 selected = "ID Card Duplicate"
             }) {
-                Text("ID Card Duplicate")
+                Text(stringResource(R.string.IDCardDuplicate))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
                 selected = "Lab access request"
             }) {
-                Text("Lab access request")
+                Text(stringResource(R.string.LabAccessRequest))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
@@ -301,13 +304,13 @@ fun TypeSelectorDropdown() {
                 expanded = false
                 selected = "Exam Grievances"
             }) {
-                Text("Exam Grievances")
+                Text(stringResource(R.string.ExamGrievances))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
                 selected = "Misc"
             }) {
-                Text("Misc")
+                Text(stringResource(R.string.Misc))
             }
         }
     }
@@ -351,7 +354,7 @@ fun InputFields(
 
     Spacer(modifier = Modifier.height(5.dp))
     Text(
-        text = "Send To",
+        text = stringResource(R.string.SendTo),
         fontWeight = FontWeight.Bold,
         color = Color.Gray
     )
@@ -363,7 +366,7 @@ fun InputFields(
                 enabled = true,
                 colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
             )
-            Text(text = "HOD", fontWeight = FontWeight.Bold,)
+            Text(text = stringResource(R.string.HOD), fontWeight = FontWeight.Bold,)
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             val sendToAdvisors = remember { mutableStateOf(false) }
@@ -374,7 +377,7 @@ fun InputFields(
                 enabled = true,
                 colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
             )
-            Text(text = "Advisors", fontWeight = FontWeight.Bold,)
+            Text(text = stringResource(R.string.Advisors), fontWeight = FontWeight.Bold,)
         }
     }
 
@@ -385,7 +388,7 @@ fun InputFields(
             .padding(horizontal = 30.dp)
             .height(40.dp)
     ) {
-        Text(text = "Submit",
+        Text(text = stringResource(R.string.SubmitButtomText),
         fontSize = 20.sp)
     }
 }
