@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class SlipViewModel : ViewModel() {
-    var slipType by mutableStateOf(value = "")
+    var slipType: String? by mutableStateOf(value = null)
     var title by mutableStateOf(value = "")
     var description by mutableStateOf(value = "")
     var sendToHOD by mutableStateOf(value = false)

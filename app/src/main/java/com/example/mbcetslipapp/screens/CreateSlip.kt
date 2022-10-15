@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.SlipViewModel
+import com.example.slipprojecttrialerror.data.Slip
+import com.example.slipprojecttrialerror.data.slips
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -86,7 +88,7 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                         .fillMaxWidth()
                         .padding(top = 20.dp)
                 ) {
-                    TypeSelectorDropdown()
+                    TypeSelectorDropdown(model)
                     val sdf = SimpleDateFormat("dd/MM/yyyy")
                     val currentDateAndTime = sdf.format(Date())
                     Box(
@@ -255,14 +257,13 @@ fun AppTextField(
 
 
 @Composable
-fun TypeSelectorDropdown() {
+fun TypeSelectorDropdown(viewModel: SlipViewModel) {
     var expanded by remember { mutableStateOf(false) }
-    var selected: String? by remember { mutableStateOf(null) }
 
     Box {
         Button(onClick = { expanded = true }) {
             Text(
-                text = selected ?: "Select Type",
+                text = viewModel.slipType ?: "Select Type",
             )
             Spacer(Modifier.size(ButtonDefaults.IconSpacing))
             Icon(
@@ -278,37 +279,37 @@ fun TypeSelectorDropdown() {
         ) {
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Gate Pass"
+                viewModel.slipType = "Gate Pass"
             }) {
                 Text(stringResource(R.string.GatePass))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "ID Card Duplicate"
+                viewModel.slipType = "ID Card Duplicate"
             }) {
                 Text(stringResource(R.string.IDCardDuplicate))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Lab access request"
+                viewModel.slipType = "Lab access request"
             }) {
                 Text(stringResource(R.string.LabAccessRequest))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Extra class request"
+                viewModel.slipType = "Extra class request"
             }) {
                 Text("Extra class request")
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Exam Grievances"
+                viewModel.slipType = "Exam Grievances"
             }) {
                 Text(stringResource(R.string.ExamGrievances))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Misc"
+                viewModel.slipType = "Misc"
             }) {
                 Text(stringResource(R.string.Misc))
             }
@@ -382,7 +383,9 @@ fun InputFields(
     }
 
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+//            slips.add(Slip(name= stringResource(R.string.id_name))
+        },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 30.dp)
