@@ -1,4 +1,4 @@
-package com.example.slipprojecttrialerror.src
+package com.example.mbcetslipapp.src
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
@@ -21,35 +21,31 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.slipprojecttrialerror.R
-import com.example.slipprojecttrialerror.data.Slip
-import com.example.slipprojecttrialerror.data.slips
-import com.example.slipprojecttrialerror.ui.theme.SlipProjectTrialErrorTheme
-import com.example.slipprojecttrialerror.ui.theme.SlipViewModel
+import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
 
 @Composable
-fun PermissionScreen(slipViewModel: SlipViewModel = viewModel()) {
-    val slipUiState by slipViewModel.uiState.collectAsState()
+fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
+    val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = {
             if(slipUiState.userType=="Student")
-                slipViewModel.updateUserType("HoD")
+                listSlipViewModel.updateUserType("HoD")
             else
-                slipViewModel.updateUserType("Student")
+                listSlipViewModel.updateUserType("Student")
         },
             modifier = Modifier){
             Text("Switch")
         }
         Row(modifier = Modifier.padding(8.dp)) {
             Button(onClick = {
-                slipViewModel.updateSelection("Requested")
+                listSlipViewModel.updateSelection("Requested")
             },
             modifier = Modifier){
                 Text(stringResource(id = R.string.requested))
             }
             Spacer(Modifier.weight(0.5f))
             Button(onClick = {
-                slipViewModel.updateSelection("Approved")
+                listSlipViewModel.updateSelection("Approved")
             },
                 modifier = Modifier){
                 Text(stringResource(id = R.string.approved))
@@ -64,8 +60,8 @@ fun PermissionScreen(slipViewModel: SlipViewModel = viewModel()) {
 }
 
 @Composable
-fun RequestedPermissionScreen(slipViewModel: SlipViewModel = viewModel()) {
-    val slipUiState by slipViewModel.uiState.collectAsState()
+fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
+    val slipUiState by listSlipViewModel.uiState.collectAsState()
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
@@ -76,8 +72,8 @@ fun RequestedPermissionScreen(slipViewModel: SlipViewModel = viewModel()) {
 }
 
 @Composable
-fun ApprovedPermissionScreen(slipViewModel: SlipViewModel = viewModel()) {
-    val slipUiState by slipViewModel.uiState.collectAsState()
+fun ApprovedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
+    val slipUiState by listSlipViewModel.uiState.collectAsState()
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {

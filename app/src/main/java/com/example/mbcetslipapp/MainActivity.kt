@@ -12,6 +12,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.mbcetslipapp.screens.IdCard
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -43,7 +44,7 @@ fun SlipHome() {
         modifier = Modifier
             .background(MaterialTheme.colors.background)
     ) {
-
+        IdCard()
     }
 
 }

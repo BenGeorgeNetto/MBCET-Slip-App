@@ -1,5 +1,6 @@
 package com.example.mbcetslipapp.screens
 
+import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
@@ -7,8 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,10 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mbcetslipapp.R
+import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 
 @Composable
@@ -107,7 +110,7 @@ fun ViewBut(expanded: Boolean, onClick: () -> Unit){ // view more/less button ne
                 fontWeight = FontWeight.SemiBold
             )
             Icon(
-                imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
                 tint = MaterialTheme.colors.primaryVariant,
                 contentDescription = "None"
             )
@@ -138,7 +141,7 @@ fun IdCard() {
             painterResource(R.drawable.dp),
             contentDescription = null,
             modifier = Modifier
-                .padding( 1.dp)
+                .padding(1.dp)
                 .offset(x = imgpad, y = (-200).dp)
                 .fillMaxSize()
                 .clip(shape)
@@ -229,5 +232,21 @@ fun IdCard() {
             }
         }
 
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun IdCardLightPreview() {
+    MBCETSlipAppTheme {
+        IdCard()
+    }
+}
+
+@Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun IdCardDarkPreview() {
+    MBCETSlipAppTheme {
+        IdCard()
     }
 }
