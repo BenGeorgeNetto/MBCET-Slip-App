@@ -1,10 +1,14 @@
 package com.example.mbcetslipapp
 
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +23,8 @@ class MainActivity : ComponentActivity() {
             MBCETSlipAppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
                 ) {
-
+                    SlipApp()
                 }
             }
         }
@@ -29,10 +32,46 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    MBCETSlipAppTheme {
+fun SlipApp() {
+    SlipHome()
+}
 
+
+@Composable
+fun SlipHome() {
+
+    Scaffold(
+        modifier = Modifier
+            .background(MaterialTheme.colors.background)
+    ) {
+
+    }
+
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun LightPreview() {
+    MBCETSlipAppTheme {
+        SlipApp()
+    }
+}
+
+@Composable
+fun TopAppBar() {
+    // to define top app bar
+}
+
+@Composable
+fun BottomNavBar() {
+    // to define bottom navigation bar
+}
+
+@Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun DarkPreview() {
+    MBCETSlipAppTheme {
+        SlipApp()
     }
 }
