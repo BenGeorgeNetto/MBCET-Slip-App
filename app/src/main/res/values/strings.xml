@@ -61,11 +61,7 @@
     <string name="Advisors">Advisors</string>
     <string name="SubmitButtomText">Submit</string>
 
-<<<<<<< Updated upstream
     //Slip View List
-=======
-    // Slip List View
->>>>>>> Stashed changes
     <string name="slip_misc">Miscellaneous</string>
     <string name="slip_gate">Gate Pass</string>
     <string name="slip_id">ID Card Duplicate</string>
@@ -75,7 +71,6 @@
     <string name="approve_slip">Approve</string>
     <string name="requested">Requested</string>
     <string name="approved">Approved</string>
-<<<<<<< Updated upstream
     <string name="hod_cs">Dr. Tom Riddle</string>
     <string name="name_1">Klarc Cent</string>
     <string name="name_2">Ab Cde</string>
@@ -96,10 +91,6 @@
     <string name="roll_2">B19CS1111</string>
     <string name="roll_3">B20CS1899</string>
     <string name="roll_4">B22CS1219</string>
-=======
-    <string name="hod_cs">Dr. Tessy Mathew</string>
-
->>>>>>> Stashed changes
 
  //all slips page
     <string name="Sara">Sara P Thomas</string>
