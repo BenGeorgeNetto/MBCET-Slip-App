@@ -59,7 +59,7 @@ fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
-            if (!it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
+            if (!it.status.value)
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -71,7 +71,7 @@ fun ApprovedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel())
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
-            if (it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
+            if (it.status.value)
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -134,7 +134,7 @@ fun SlipInfo(slip: Slip, userType: String) {
                 )
                 slip.advisors.forEach {
                     Text(
-                        text = "$it, ",
+                        text = "${stringResource(id=it)}, ",
                         modifier = Modifier.padding(vertical = 8.dp),
                         fontSize = 12.sp,
                         color = MaterialTheme.colors.primaryVariant
@@ -154,13 +154,13 @@ fun SlipInfo(slip: Slip, userType: String) {
         Column() {
             Row(modifier = Modifier.padding(horizontal = 8.dp)) {
                 Text(
-                    text = "S${slip.semester} ${slip.className}",
+                    text = "S${stringResource(id=slip.semester)} ${stringResource(id = slip.className)}",
                     modifier = Modifier.padding(vertical = 8.dp),
                     fontSize = 12.sp,
                     color = MaterialTheme.colors.primaryVariant
                 )
                 Text(
-                    text = ": ${slip.rollNo}",
+                    text = ": ${stringResource(id = slip.rollNo)}",
                     modifier = Modifier.padding(
                         8.dp),
                     fontSize = 12.sp,

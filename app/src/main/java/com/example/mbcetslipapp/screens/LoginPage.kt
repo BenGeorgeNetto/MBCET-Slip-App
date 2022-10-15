@@ -27,15 +27,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mbcetslipapp.R
+import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
-fun enterUserName() {
-    var username by remember { mutableStateOf("") }
+fun enterUserName(listSlipViewModel: ListSlipViewModel = viewModel()) {
+    val slipUiState by listSlipViewModel.uiState.collectAsState()
     OutlinedTextField(
-        value = username,
-        onValueChange = { username = it },
+        value = slipUiState.userName,
+        onValueChange = { listSlipViewModel.setUser(it) },
         singleLine = true,
         leadingIcon = {
             IconButton(onClick = { /*TODO*/ }) {
