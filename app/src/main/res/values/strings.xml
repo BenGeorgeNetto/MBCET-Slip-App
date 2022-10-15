@@ -61,4 +61,34 @@
     <string name="Advisors">Advisors</string>
     <string name="SubmitButtomText">Submit</string>
 
+    //Slip View List
+    <string name="slip_misc">Miscellaneous</string>
+    <string name="slip_gate">Gate Pass</string>
+    <string name="slip_id">ID Card Duplicate</string>
+    <string name="slip_lab">Lab Access Request</string>
+    <string name="slip_extra">Extra Class Request</string>
+    <string name="slip_exam">Exam Grievances</string>
+    <string name="approve_slip">Approve</string>
+    <string name="requested">Requested</string>
+    <string name="approved">Approved</string>
+    <string name="hod_cs">Dr. Tom Riddle</string>
+    <string name="name_1">Klarc Cent</string>
+    <string name="name_2">Ab Cde</string>
+    <string name="name_3">Calma Von Feincherstire</string>
+    <string name="name_4">Jacob</string>
+    <string name="name_5">Frieren</string>
+    <string name="name_6">Ariel</string>
+    <string name="disc_1">Trial And Error</string>
+    <string name="disc_2">This is to request for a new id. Unfortunately, my ID is lost, and I would like to request a replacement.</string>
+    <string name="disc_3">I am feeling fever and extreme headaches. Please excuse me for the day.</string>
+    <string name="class_1">CS 2</string>
+    <string name="advisor_1">Mr. Oogway</string>
+    <string name="advisor_2">Dr. Dumbledore</string>
+    <string name="advisor_3">Mr. Gandalf</string>
+    <string name="roll_1">B21CS1234</string>
+    <string name="class_2">CS 1</string>
+    <string name="advisor_4">Ms. Daenerys</string>
+    <string name="roll_2">B19CS1111</string>
+    <string name="roll_3">B20CS1899</string>
+    <string name="roll_4">B22CS1219</string>
 </resources>

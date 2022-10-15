@@ -1,7 +1,6 @@
 package com.example.mbcetslipapp.ui.theme
 
 import androidx.lifecycle.ViewModel
-import com.example.slipprojecttrialerror.ui.theme.SlipUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

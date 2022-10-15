@@ -1,12 +1,12 @@
-package com.example.mbcetslipapp.src
+package com.example.mbcetslipapp.screens
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -14,39 +14,34 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mbcetslipapp.R
+import com.example.mbcetslipapp.data.Slip
+import com.example.mbcetslipapp.data.slips
+import com.example.mbcetslipapp.ui.theme.PrimBlue
 import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
 
 @Composable
 fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = {
-            if(slipUiState.userType=="Student")
-                listSlipViewModel.updateUserType("HoD")
-            else
-                listSlipViewModel.updateUserType("Student")
-        },
-            modifier = Modifier){
-            Text("Switch")
-        }
         Row(modifier = Modifier.padding(8.dp)) {
             Button(onClick = {
                 listSlipViewModel.updateSelection("Requested")
             },
-            modifier = Modifier){
+                modifier = Modifier,
+                colors = ButtonDefaults.buttonColors(backgroundColor = PrimBlue)){
                 Text(stringResource(id = R.string.requested))
             }
             Spacer(Modifier.weight(0.5f))
             Button(onClick = {
                 listSlipViewModel.updateSelection("Approved")
             },
-                modifier = Modifier){
+                modifier = Modifier,
+                colors = ButtonDefaults.buttonColors(backgroundColor = PrimBlue)){
                 Text(stringResource(id = R.string.approved))
             }
         }
@@ -64,8 +59,8 @@ fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
-                if (!it.status.value)
-                    SlipItem(slip = it, userType = slipUiState.userType)
+            if (!it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
+                SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
 }
@@ -76,7 +71,7 @@ fun ApprovedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel())
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
-            if (it.status.value)
+            if (it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -103,12 +98,15 @@ fun SlipItem(slip: Slip, modifier: Modifier = Modifier, userType: String) {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                SlipData(slip.name, slip.title, stringResource(id = slip.slipType))
+                SlipData(stringResource(id = slip.name), slip.title, stringResource(id = slip.slipType),userType = userType)
                 Spacer(Modifier.weight(1f))
                 ExpandButton(expanded = expanded, onClick = {expanded = !expanded})
             }
             if (expanded) {
-                SlipDescription(slip.slipDescribe)
+                Column() {
+                    SlipInfo(slip, userType)
+                    SlipDescription(slip.slipDescribe)
+                }
                 Spacer(Modifier.weight(1f))
                 if((userType == "Advisor" || userType == "HoD") && !slip.status.value)
                 {
@@ -124,12 +122,64 @@ fun SlipItem(slip: Slip, modifier: Modifier = Modifier, userType: String) {
 }
 
 @Composable
+fun SlipInfo(slip: Slip, userType: String) {
+    if(userType == "Student") {
+        Column() {
+            Row(modifier = Modifier.padding(horizontal = 8.dp)) {
+                Text(
+                    text = "Advisors: ",
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colors.primaryVariant
+                )
+                slip.advisors.forEach {
+                    Text(
+                        text = "$it, ",
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colors.primaryVariant
+                    )
+                }
+            }
+            Text(
+                text = "HoD: ${stringResource(id = slip.HoD)}",
+                modifier = Modifier.padding(
+                    8.dp),
+                fontSize = 12.sp,
+                color = MaterialTheme.colors.primaryVariant
+            )
+        }
+    }
+    else {
+        Column() {
+            Row(modifier = Modifier.padding(horizontal = 8.dp)) {
+                Text(
+                    text = "S${slip.semester} ${slip.className}",
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colors.primaryVariant
+                )
+                Text(
+                    text = ": ${slip.rollNo}",
+                    modifier = Modifier.padding(
+                        8.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colors.primaryVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun ApproveButton(
     onClicked: () -> Unit
 )
 {
     Button(
         onClick = onClicked,
+        modifier = Modifier.padding(8.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = PrimBlue)
     )
     {
         Text(text = stringResource(id = R.string.approve_slip))
@@ -140,24 +190,33 @@ fun ApproveButton(
 fun SlipDescription(slipDescribe : String)
 {
     Text(
-        text = "Description: $slipDescribe",
+        text = "Description: \n $slipDescribe",
         modifier = Modifier.padding(8.dp),
-        fontSize = 12.sp,
-        color = Color.Gray
+        fontSize = 13.sp,
+        color = MaterialTheme.colors.primaryVariant
     )
 }
 
 @Composable
-fun SlipData (name: String, title: String, type: String)
+fun SlipData (name: String, title: String, type: String, userType: String)
 {
     Column() {
-        Text(
-            text = "$name: $title",
-            modifier = Modifier.padding(8.dp)
-        )
+        if(userType == "Student")
+        {
+            Text(
+                text = title,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+        else {
+            Text(
+                text = "$name: $title",
+                modifier = Modifier.padding(8.dp)
+            )
+        }
         Text(
             text = type,
-            color = Color.Gray,
+            color = MaterialTheme.colors.primaryVariant,
             modifier = Modifier.padding(8.dp),
             fontSize = 14.sp,
         )
@@ -172,38 +231,8 @@ private fun ExpandButton(
     IconButton(onClick = onClick) {
         Icon(
             imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
-            tint = MaterialTheme.colors.secondary,
+            tint = MaterialTheme.colors.primaryVariant,
             contentDescription = "Check Description",
         )
-    }
-}
-
-@Composable
-fun AddRequest(@StringRes slipType: Int, title: String, slipDescribe: String) {
-    slips.add(Slip(slipType = slipType, title = title, slipDescribe = slipDescribe))
-}
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SlipProjectTrialErrorTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            PermissionScreen()
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview2() {
-    SlipProjectTrialErrorTheme(darkTheme = true) {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            PermissionScreen()
-        }
     }
 }

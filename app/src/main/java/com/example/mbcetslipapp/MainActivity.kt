@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mbcetslipapp.screens.IdCard
+import com.example.mbcetslipapp.screens.PermissionScreen
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    SlipApp()
+                    PermissionScreen()
                 }
             }
         }
