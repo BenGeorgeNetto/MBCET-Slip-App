@@ -1,11 +1,9 @@
-package com.example.slipprojecttrialerror.data
+package com.example.mbcetslipapp.data
 
 import androidx.annotation.StringRes
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.res.stringResource
-import com.example.slipprojecttrialerror.R
+import com.example.mbcetslipapp.R
 
 data class Slip(
     val name: String = "",
