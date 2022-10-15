@@ -69,7 +69,7 @@ fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
-            if (!it.status.value && (it.rollNo == slipUiState.studentRoll || slipUiState.userType != "Student"))
+            if (!it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -81,7 +81,7 @@ fun ApprovedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel())
     LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
         items(slips)
         {
-            if (it.status.value && (it.rollNo == slipUiState.studentRoll || slipUiState.userType != "Student"))
+            if (it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -108,14 +108,14 @@ fun SlipItem(slip: Slip, modifier: Modifier = Modifier, userType: String) {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                SlipData(slip.name, slip.title, stringResource(id = slip.slipType),userType = userType)
+                SlipData(stringResource(id = slip.name), stringResource(id = slip.title), stringResource(id = slip.slipType),userType = userType)
                 Spacer(Modifier.weight(1f))
                 ExpandButton(expanded = expanded, onClick = {expanded = !expanded})
             }
             if (expanded) {
                 Column() {
                     SlipInfo(slip, userType)
-                    SlipDescription(slip.slipDescribe)
+                    SlipDescription(stringResource(id = slip.slipDescribe))
                 }
                 Spacer(Modifier.weight(1f))
                 if((userType == "Advisor" || userType == "HoD") && !slip.status.value)
