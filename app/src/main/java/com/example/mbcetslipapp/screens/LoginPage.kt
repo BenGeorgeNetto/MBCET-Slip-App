@@ -31,7 +31,7 @@ import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
-fun enterUserName() {
+fun EnterUserName() {
     var username by remember { mutableStateOf("") }
     OutlinedTextField(
         value = username,
@@ -58,7 +58,7 @@ fun enterUserName() {
 }
 
 @Composable
-fun enterPassword() {
+fun EnterPassword() {
     var password by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     OutlinedTextField(
@@ -102,7 +102,7 @@ fun enterPassword() {
 }
 
 @Composable
-fun loginButton() {
+fun LoginButton() {
     Button(
         onClick = { /*TODO*/ },
         shape = RoundedCornerShape(16.dp),
@@ -118,7 +118,7 @@ fun loginButton() {
 }
 
 @Composable
-fun forgotPasswordButton() {
+fun ForgotPasswordButton() {
     TextButton(
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.background)
@@ -131,7 +131,7 @@ fun forgotPasswordButton() {
 }
 
 @Composable
-fun loginPage() {
+fun LoginPage() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -150,15 +150,15 @@ fun loginPage() {
         )
 
         Spacer(modifier = Modifier.height(72.dp))
-        enterUserName()
+        EnterUserName()
 
         Spacer(modifier = Modifier.height(24.dp))
-        enterPassword()
+        EnterPassword()
 
         Spacer(modifier = Modifier.height(32.dp))
-        loginButton()
+        LoginButton()
 
-        forgotPasswordButton()
+        ForgotPasswordButton()
 
         Spacer(modifier = Modifier.height(128.dp))
     }
@@ -168,6 +168,6 @@ fun loginPage() {
 @Composable
 fun DefaultPreview() {
     MBCETSlipAppTheme() {
-        loginPage()
+        LoginPage()
     }
 }
