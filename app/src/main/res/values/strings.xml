@@ -40,4 +40,25 @@
     <string name="password_field_default_label">Password</string>
     <string name="forgot_password">ForgotPassword</string>
 
+    //Create Slip Dummy Data
+    <string name="semester">S3</string>
+    <string name="Name">Name</string>
+    <string name="FillUpSlipDetails">Fill up slip details</string>
+    <string name="CreateASlip">Create a Slip</string>
+    <string name="RegNo">RegNo</string>
+    <string name="AdmnNo">AdmnNo</string>
+    <string name="CS1">CS1</string>
+    <string name="ClassTitle">Class</string>
+    <string name="SemesterTitle">Semester</string>
+    <string name="CreateSlipFooter">*This slip will submitted for approval to your department faculties</string>
+    <string name="GatePass">Gate Pass</string>
+    <string name="IDCardDuplicate">ID Card Duplicate</string>
+    <string name="LabAccessRequest">Lab access request</string>
+    <string name="ExamGrievances">Exam Grievances</string>
+    <string name="Misc">Misc</string>
+    <string name="SendTo">Send To</string>
+    <string name="HOD">HOD</string>
+    <string name="Advisors">Advisors</string>
+    <string name="SubmitButtomText">Submit</string>
+
 </resources>
