@@ -1,8 +1,8 @@
-package com.example.mbcetslipapp.ui
+package com.example.mbcetslipapp.screens
+
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -24,7 +24,7 @@ import com.example.mbcetslipapp.R
 
 
 @Composable
-fun Moredetails(){  // more student details
+fun MoreDetails(){  // more student details
     Row (
         modifier = Modifier
             .fillMaxWidth(),
@@ -94,7 +94,7 @@ fun Moredetails(){  // more student details
 
 
 @Composable
-fun Viewbut(expanded: Boolean, onClick: () -> Unit){ // view more/less button needs work
+fun ViewBut(expanded: Boolean, onClick: () -> Unit){ // view more/less button needs work
     IconButton(onClick = onClick) {
         Row {
             Text(
@@ -116,7 +116,7 @@ fun Viewbut(expanded: Boolean, onClick: () -> Unit){ // view more/less button ne
 }
 
 @Composable
-fun Idcard() {
+fun IdCard() {
     var expanded by remember { mutableStateOf(false) }
     val shape = RoundedCornerShape(25.dp,25.dp,20.dp,20.dp)
     val image = painterResource(R.drawable.qr)
@@ -160,7 +160,7 @@ fun Idcard() {
                     {
                         Spacer(Modifier.height(20.dp))
                         Text(
-                            text = stringResource(id =R.string.name),
+                            text = stringResource(id =R.string.id_name),
                             fontSize = 36.sp,
                             fontWeight = FontWeight.Bold,
                         )
@@ -203,7 +203,7 @@ fun Idcard() {
                 Column(modifier = Modifier
                     .fillMaxWidth(),) {
                     Spacer(Modifier.height(170.dp))
-                    Moredetails()
+                    MoreDetails()
                 }
                 Column(modifier = Modifier
                     .fillMaxWidth(),
@@ -211,7 +211,7 @@ fun Idcard() {
                     Spacer(Modifier.height(320.dp))
                     if (!expanded) {
 
-                        Viewbut(expanded = expanded, onClick = { expanded = !expanded })
+                        ViewBut(expanded = expanded, onClick = { expanded = !expanded })
                     }
 
                     if (expanded) {
@@ -223,7 +223,7 @@ fun Idcard() {
                             painter = image,
                             contentDescription = null
                         )
-                        Viewbut(expanded = expanded, onClick = { expanded = !expanded })
+                        ViewBut(expanded = expanded, onClick = { expanded = !expanded })
                     }
                 }
             }
