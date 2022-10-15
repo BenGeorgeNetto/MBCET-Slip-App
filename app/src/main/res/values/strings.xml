@@ -34,4 +34,10 @@
     <string name="mac_field">MAC ID</string>
     <string name="mac_value">54–42–10–BC-31-69</string>
 
+    // login page strings
+    <string name="login_button_text">LOGIN</string>
+    <string name="username_field_default_label">Username</string>
+    <string name="password_field_default_label">Password</string>
+    <string name="forgot_password">ForgotPassword</string>
+
 </resources>
