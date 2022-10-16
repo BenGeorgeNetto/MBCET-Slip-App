@@ -81,11 +81,7 @@ fun CreditDetails(credit: Credit,modifier: Modifier=Modifier){
             modifier = Modifier.padding(10.dp)
         )
         Spacer(modifier = Modifier.height(0.dp))
-        Text(
-            text = stringResource(id = credit.email),
-            fontSize = 20.sp,
-            modifier = Modifier.padding(10.dp)
-        )
+       
     }
     Spacer(modifier = Modifier.height(10.dp))
 }
