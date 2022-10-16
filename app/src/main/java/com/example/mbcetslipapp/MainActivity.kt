@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mbcetslipapp.screens.CreateSlipLayout
 import com.example.mbcetslipapp.screens.IdCard
 import com.example.mbcetslipapp.screens.PermissionScreen
+import com.example.mbcetslipapp.screens.ItmsWifiSlip
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) {
                     PermissionScreen()
+                    ItmsWifiSlip()
                 }
             }
         }
