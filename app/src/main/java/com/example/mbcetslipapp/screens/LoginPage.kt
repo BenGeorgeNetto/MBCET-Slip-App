@@ -1,6 +1,7 @@
 package com.example.mbcetslipapp.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -28,15 +29,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.mbcetslipapp.NavigationItem
 import com.example.mbcetslipapp.R
+import com.example.mbcetslipapp.SlipHome
 import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
-fun EnterUserName(username:String, onVal: (String?)->Unit) {
+fun EnterUserName(listSlipViewModel: ListSlipViewModel, onChange: (String) -> Unit) {
+    var username by remember { mutableStateOf(listSlipViewModel.uiState.value.userName) }
     OutlinedTextField(
         value = username,
-        onValueChange = { onVal },
+        onValueChange = { username = it
+                        onChange},
         singleLine = true,
         leadingIcon = {
             IconButton(onClick = { /*TODO*/ }) {
@@ -103,11 +113,15 @@ fun EnterPassword() {
 }
 
 @Composable
-fun LoginButton() {
+fun LoginButton(navController: NavController) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+            navController.navigate("home") {
+                popUpTo("login") { inclusive = true }
+            }
+        },
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.size(128.dp, 56.dp),
+        modifier = Modifier.size(150.dp, 48.dp),
         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.surface)
     ) {
         Text(
@@ -132,14 +146,51 @@ fun ForgotPasswordButton() {
 }
 
 @Composable
-fun LoginPage(listSlipViewModel: ListSlipViewModel = viewModel()): ListSlipViewModel {
-    val slipUiState by listSlipViewModel.uiState.collectAsState()
+fun SignUpButton(navController: NavController) {
+    TextButton(
+        onClick = { navController.navigate("register_screen") {
+            popUpTo("login")
+        } },
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.background)
+    ) {
+        Text(
+            text = stringResource(R.string.sign_up_prompt),
+            fontSize = 16.sp
+        )
+    }
+}
+
+@Composable
+fun Login(listSlipViewModel: ListSlipViewModel = viewModel()) {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "login", builder = {
+        composable(
+            "login",
+            content = { LoginPage(navController, listSlipViewModel, {listSlipViewModel.setUser(it.orEmpty())}) }
+        )
+        composable(
+            "register_screen",
+            content = { LoginAndRegistration() }
+        )
+        composable(
+            "home",
+            content = { SlipHome(listSlipViewModel) }
+        )
+    })
+}
+
+
+@Composable
+fun LoginPage(navController: NavController, listSlipViewModel: ListSlipViewModel, onChange: (String?) -> Unit) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxSize()
+            .background(MaterialTheme.colors.background)
     ) {
         Image(
             painter = painterResource(id = R.drawable.frame_99__1_),
@@ -152,26 +203,29 @@ fun LoginPage(listSlipViewModel: ListSlipViewModel = viewModel()): ListSlipViewM
         )
 
         Spacer(modifier = Modifier.height(72.dp))
-        EnterUserName(slipUiState.userName, {{ it: String? ->
-            listSlipViewModel.setUser(it.orEmpty())}})
+        EnterUserName(listSlipViewModel,
+            onChange = onChange
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
         EnterPassword()
 
         Spacer(modifier = Modifier.height(32.dp))
-        LoginButton()
+        LoginButton(navController)
+
+        Spacer(modifier = Modifier.height(32.dp))
 
         ForgotPasswordButton()
+        SignUpButton(navController)
 
         Spacer(modifier = Modifier.height(128.dp))
     }
-    return listSlipViewModel
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    MBCETSlipAppTheme() {
-        LoginPage()
-    }
-}
+//@Preview(showSystemUi = true)
+//@Composable
+//fun DefaultPreview() {
+//    MBCETSlipAppTheme() {
+//        LoginPage()
+//    }
+//}

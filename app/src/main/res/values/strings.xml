@@ -131,4 +131,5 @@
     <string name="Revathy">HOD : Revathy Singh</string>
     <string name="Bindu">Staff Advisor : Bindu Reji</string>
     <string name="SelectType">Select Type</string>
+    <string name="sign_up_prompt">Dont have an account</string>
 </resources>
