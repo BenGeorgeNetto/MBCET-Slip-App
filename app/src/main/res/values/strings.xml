@@ -132,4 +132,32 @@
     <string name="Bindu">Staff Advisor : Bindu Reji</string>
     <string name="SelectType">Select Type</string>
     <string name="sign_up_prompt">Dont have an account</string>
+
+    //credits
+    <string name="Ben">Ben George Netto</string>
+    <string name="Noel">Noel John Robert</string>
+    <string name="Adithya">Adithya Krishnan</string>
+    <string name="Ritin">Ritin  George  D    </string>
+    <string name="Samuel">Samuel    </string>
+    <string name="Abhishek">Abhishek Raman</string>
+    <string name="Liya">Liya Susan Biju</string>
+    <string name="user1">Github Username : BenGeorgeNetto</string>
+    <string name="user2">Github Username : noel060202</string>
+    <string name="user3">Github Username : fal3n-4ngel</string>
+    <string name="user4">Github Username : aurora--0025</string>
+    <string name="user5">Github Username : SamJohn04</string>
+    <string name="user6">Github Username :</string>
+    <string name="user7">Github Username : Liya-Susan</string>
+    <string name="mail1">Email : </string>
+    <string name="mail2">Email : </string>
+    <string name="mail3">Email : </string>
+    <string name="mail4">Email : </string>
+    <string name="mail5">Email : </string>
+    <string name="mail6">Email : </string>
+    <string name="mail7">Email : </string>
+
+
+
+
+
 </resources>
