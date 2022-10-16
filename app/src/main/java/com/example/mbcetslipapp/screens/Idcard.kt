@@ -129,7 +129,7 @@ fun IdCard() {
         tween(1000, easing = LinearOutSlowInEasing)
     )
     val pad: Dp by animateDpAsState(
-        if (expanded) 25.dp else 360.dp,
+        if (expanded) 20.dp else 340.dp,
         tween(1000, easing = LinearOutSlowInEasing)
     )
 
@@ -220,7 +220,6 @@ fun IdCard() {
                 ) {
                     Spacer(Modifier.height(320.dp))
                     if (!expanded) {
-
                         ViewBut(expanded = expanded, onClick = { expanded = !expanded })
                     }
 
@@ -228,7 +227,7 @@ fun IdCard() {
                         Image(
                             modifier = Modifier
                                 .padding(top = 0.dp)
-                                .fillMaxSize(0.8f),
+                                .fillMaxSize(0.7f),
                             painter = image,
                             contentDescription = null
                         )
