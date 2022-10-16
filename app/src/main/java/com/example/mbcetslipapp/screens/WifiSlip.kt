@@ -9,10 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
@@ -38,7 +40,6 @@ fun ItmsWifiSlip() {
                 Text(
                     text = stringResource(R.string.itms_top_bar),
                     style = MaterialTheme.typography.h4,
-                    color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center
                 )
             }
@@ -84,7 +85,8 @@ fun ItmsWifiSlip() {
             ) {
                 Text(
                     text = "Submit",
-                    style = MaterialTheme.typography.body2
+                    style = MaterialTheme.typography.body2,
+                    color = MaterialTheme.colors.onPrimary
                 )
             }
         }
@@ -194,30 +196,32 @@ fun DeviceDetailRow(field: Int, value: Int) {
     }
 }
 
-//@Composable
-//fun DeviceTextField(
-//    value: String,
-//    onValueChange: (String) -> Unit,
-//    modifier: Modifier = Modifier
-//) {
-//    OutlinedTextField(
-//        value = value,
-//        onValueChange = onValueChange,
-//        singleLine = true,
-//        placeholder = {
-//            Text(
-//                text = value,
-//                style = TextStyle(
-//                    color = MaterialTheme.colors.onBackground
-//                )
-//            )
-//        },
-//        colors = TextFieldDefaults.outlinedTextFieldColors(
-//            focusedBorderColor = MaterialTheme.colors.onBackground
-//        ),
-//        modifier = Modifier.height(12.dp)
-//    )
-//}
+@Composable
+fun DeviceTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        singleLine = true,
+        placeholder = {
+            Text(
+                text = value,
+                style = TextStyle(
+                    color = MaterialTheme.colors.onBackground
+                )
+            )
+        },
+        enabled = true,
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = MaterialTheme.colors.onBackground
+        ),
+        modifier = Modifier.height(12.dp),
+        textStyle = TextStyle(fontSize = 18.sp, color = MaterialTheme.colors.onPrimary),
+    )
+}
 
 @Preview(showBackground = true)
 @Composable

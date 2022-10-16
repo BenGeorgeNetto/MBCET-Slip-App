@@ -3,15 +3,15 @@
 
 
     //Id Card Dummy Data
-    <string name="id_name">Adlu Rahman</string>
-    <string name="id">MBT1208</string>
-    <string name="clas">CSE2021</string>
+    <string name="id_name">Rick Astley</string>  // Adding this as the universal dummy Name line 75
+    <string name="id">B20CS1169</string>   // Adding this as the universal dummy roll no line 88
+    <string name="clas">CSE2020</string>
     <string name="adno">Admission No   :</string>
     <string name="dob">Date Of Birth     :</string>
     <string name="bldgrp">Blood Group      :</string>
     <string name="phone">Phone Number  :</string>
-    <string name="adnod1">9217</string>
-    <string name="dobd1">06/05/2002</string>
+    <string name="adnod1">9669</string>
+    <string name="dobd1">06/09/2002</string>
     <string name="bldgrpd1">RED </string>
     <string name="phoned1">9876543210</string>
 
@@ -53,6 +53,7 @@
     <string name="CreateSlipFooter">*This slip will submitted for approval to your department faculties</string>
     <string name="GatePass">Gate Pass</string>
     <string name="IDCardDuplicate">ID Card Duplicate</string>
+    <string name="ExtraClassRequest">Extra class request</string>
     <string name="LabAccessRequest">Lab access request</string>
     <string name="ExamGrievances">Exam Grievances</string>
     <string name="Misc">Misc</string>
@@ -91,4 +92,43 @@
     <string name="roll_2">B19CS1111</string>
     <string name="roll_3">B20CS1899</string>
     <string name="roll_4">B22CS1219</string>
+
+ //all slips page
+    <string name="Sara">Sara P Thomas</string>
+    <string name="Satheesh">Satheesh Varughese</string>
+    <string name="Justin">Justin </string>
+    <string name="Divya">Divya Unni</string>
+    <string name="Lena">Lena</string>
+    <string name="Rona">Rona</string>
+    <string name="Sreenanda">Sreenanda</string>
+    <string name="Neha">Neha</string>
+    <string name="Alka">Alka</string>
+    <string name="s2cs1">S2 CS1</string>
+    <string name="s4cs2">S3 CS2</string>
+    <string name="s6cs1">S6 CS1</string>
+    <string name="s6cs2">S6 CS2</string>
+    <string name="s8cs1">S8 CS1</string>
+    <string name="s8cs2">S8 CS2</string>
+    <string name="date1">23/08/2022</string>
+    <string name="date2">24/08/2022</string>
+    <string name="date3">25/08/2022</string>
+    <string name="status1">PENDING</string>
+    <string name="status2">DECLINED</string>
+    <string name="status3">ACCEPTED</string>
+    <string name="subject1">Gate Pass</string>
+    <string name="subject2">ID Card Duplicate</string>
+    <string name="subject3">Lab Access Request</string>
+    <string name="subject4">Extra Class Request</string>
+    <string name="subject5">Exam Grievances</string>
+    <string name="desc1"> Kindly permit the gate pass as it is an emergency to leave</string>
+    <string name="desc2"> Request for a new id . Unfortunately my old id is lost </string>
+    <string name="desc3"> Kindly permit to lab for extra hours    </string>
+    <string name="desc4"> Kindly provide extra class. Many of us needs extra class </string>
+    <string name="desc5"> Kindly permit to enter examination hall </string>
+    <string name="Rejitha">Staff Advisor : Rejitha Benoy</string>
+    <string name="Manohar">Staff Advisor : Manohar Manoj</string>
+    <string name="Mithra">Staff Advisor : Mithra Kumar</string>
+    <string name="Revathy">HOD : Revathy Singh</string>
+    <string name="Bindu">Staff Advisor : Bindu Reji</string>
+    <string name="SelectType">Select Type</string>
 </resources>

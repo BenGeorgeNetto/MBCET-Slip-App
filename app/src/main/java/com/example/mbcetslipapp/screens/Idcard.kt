@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -27,8 +28,8 @@ import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 
 @Composable
-fun MoreDetails(){  // more student details
-    Row (
+fun MoreDetails() {  // more student details
+    Row(
         modifier = Modifier
             .fillMaxWidth(),
         verticalAlignment = Alignment.Top,
@@ -67,25 +68,25 @@ fun MoreDetails(){  // more student details
         Column {
             Spacer(Modifier.height(0.dp))
             Text(
-                text = stringResource(id =R.string.adnod1) ,
+                text = stringResource(id = R.string.adnod1),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                text = stringResource(id =R.string.bldgrpd1),
+                text = stringResource(id = R.string.bldgrpd1),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                text = stringResource(id =R.string.dobd1),
+                text = stringResource(id = R.string.dobd1),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                text = stringResource(id =R.string.phoned1),
+                text = stringResource(id = R.string.phoned1),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -97,7 +98,7 @@ fun MoreDetails(){  // more student details
 
 
 @Composable
-fun ViewBut(expanded: Boolean, onClick: () -> Unit){ // view more/less button needs work
+fun ViewBut(expanded: Boolean, onClick: () -> Unit) { // view more/less button needs work
     IconButton(onClick = onClick) {
         Row {
             Text(
@@ -121,20 +122,22 @@ fun ViewBut(expanded: Boolean, onClick: () -> Unit){ // view more/less button ne
 @Composable
 fun IdCard() {
     var expanded by remember { mutableStateOf(false) }
-    val shape = RoundedCornerShape(25.dp,25.dp,20.dp,20.dp)
+    val shape = RoundedCornerShape(25.dp, 25.dp, 20.dp, 20.dp)
     val image = painterResource(R.drawable.qr)
-    val imgpad: Dp by animateDpAsState(if (expanded) 450.dp else 0.dp,
-        tween(1000, easing = LinearOutSlowInEasing))
-    val pad: Dp by animateDpAsState(if (expanded) 25.dp else 360.dp,
-        tween(1000, easing = LinearOutSlowInEasing))
-
-    var color3=Color(0xFFFFFFFF)
-
+    val imgpad: Dp by animateDpAsState(
+        if (expanded) 450.dp else 0.dp,
+        tween(1000, easing = LinearOutSlowInEasing)
+    )
+    val pad: Dp by animateDpAsState(
+        if (expanded) 25.dp else 360.dp,
+        tween(1000, easing = LinearOutSlowInEasing)
+    )
 
 
     Box(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(MaterialTheme.colors.secondary),
         contentAlignment = Alignment.TopCenter,
     ) {
         Image(
@@ -144,38 +147,39 @@ fun IdCard() {
                 .padding(1.dp)
                 .offset(x = imgpad, y = (-200).dp)
                 .fillMaxSize()
-                .clip(shape)
-            ,
+                .clip(shape),
         )
-        Column (Modifier.padding(1.dp))
+        Column(Modifier.padding(1.dp))
         {
             Spacer(Modifier.height(pad))
-            Card(elevation = 1.dp,
-                contentColor = MaterialTheme.colors.primaryVariant,
-                backgroundColor = MaterialTheme.colors.onSurface.copy(alpha=0.7f),
+            Card(
+                elevation = 1.dp,
+                contentColor = MaterialTheme.colors.onPrimary,
+                backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.9f),
                 modifier = Modifier
                     .clip(shape)
-                    .fillMaxWidth())
+                    .fillMaxWidth()
+            )
             {
-                Row (horizontalArrangement = Arrangement.SpaceBetween){
+                Row(horizontalArrangement = Arrangement.SpaceBetween) {
                     Spacer(Modifier.weight(0.3f))
                     Column(Modifier.padding(10.dp))
                     {
                         Spacer(Modifier.height(20.dp))
                         Text(
-                            text = stringResource(id =R.string.id_name),
+                            text = stringResource(id = R.string.id_name),
                             fontSize = 36.sp,
                             fontWeight = FontWeight.Bold,
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text = stringResource(id =R.string.id),
+                            text = stringResource(id = R.string.id),
                             fontSize = 22.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                         Spacer(Modifier.height(10.dp))
                         Text(
-                            text = stringResource(id =R.string.clas),
+                            text = stringResource(id = R.string.clas),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -184,8 +188,7 @@ fun IdCard() {
                     Column {
 
                         Crossfade(
-                            expanded
-                            ,
+                            expanded,
                             animationSpec = tween(1000)
                         ) { targetState ->
                             Image(
@@ -203,14 +206,18 @@ fun IdCard() {
                     Spacer(Modifier.weight(0.2f))
 
                 }
-                Column(modifier = Modifier
-                    .fillMaxWidth(),) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
                     Spacer(Modifier.height(170.dp))
                     MoreDetails()
                 }
-                Column(modifier = Modifier
-                    .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Spacer(Modifier.height(320.dp))
                     if (!expanded) {
 
@@ -221,8 +228,7 @@ fun IdCard() {
                         Image(
                             modifier = Modifier
                                 .padding(top = 0.dp)
-                                .fillMaxSize(0.8f)
-                            ,
+                                .fillMaxSize(0.8f),
                             painter = image,
                             contentDescription = null
                         )

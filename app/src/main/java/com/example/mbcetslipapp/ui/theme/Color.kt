@@ -11,7 +11,7 @@ val Teal200 = Color(0xFF03DAC5)
 
 // Primary
 val PrimGreen = Color(0xFF3DDC84)
-val PrimBlue = Color(0xFF4285F4)
+val PrimBlue= Color(0xFF4285F4)
 val PrimDark = Color(0xFF073042)
 val PrimCream = Color(0xFFEFF7CF)
 val PrimLightBlue = Color(0xFFD7EFFE)

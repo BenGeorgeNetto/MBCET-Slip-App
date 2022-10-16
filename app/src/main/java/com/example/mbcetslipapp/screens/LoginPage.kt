@@ -33,11 +33,10 @@ import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
-fun enterUserName(listSlipViewModel: ListSlipViewModel = viewModel()) {
-    val slipUiState by listSlipViewModel.uiState.collectAsState()
+fun EnterUserName(username:String, onVal: (String?)->Unit) {
     OutlinedTextField(
-        value = slipUiState.userName,
-        onValueChange = { listSlipViewModel.setUser(it) },
+        value = username,
+        onValueChange = { onVal },
         singleLine = true,
         leadingIcon = {
             IconButton(onClick = { /*TODO*/ }) {
@@ -54,13 +53,13 @@ fun enterUserName(listSlipViewModel: ListSlipViewModel = viewModel()) {
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = MaterialTheme.colors.primary,
-            unfocusedBorderColor = MaterialTheme.colors.surface
+            unfocusedBorderColor = MaterialTheme.colors.onBackground
         ),
     )
 }
 
 @Composable
-fun enterPassword() {
+fun EnterPassword() {
     var password by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     OutlinedTextField(
@@ -91,7 +90,7 @@ fun enterPassword() {
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = MaterialTheme.colors.primary,
-            unfocusedBorderColor = MaterialTheme.colors.surface,
+            unfocusedBorderColor = MaterialTheme.colors.onBackground,
         ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password,
@@ -104,7 +103,7 @@ fun enterPassword() {
 }
 
 @Composable
-fun loginButton() {
+fun LoginButton() {
     Button(
         onClick = { /*TODO*/ },
         shape = RoundedCornerShape(16.dp),
@@ -120,7 +119,7 @@ fun loginButton() {
 }
 
 @Composable
-fun forgotPasswordButton() {
+fun ForgotPasswordButton() {
     TextButton(
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.background)
@@ -133,7 +132,8 @@ fun forgotPasswordButton() {
 }
 
 @Composable
-fun loginPage() {
+fun LoginPage(listSlipViewModel: ListSlipViewModel = viewModel()) {
+    val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -142,7 +142,7 @@ fun loginPage() {
             .fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.templogo),
+            painter = painterResource(id = R.drawable.frame_99__1_),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -152,15 +152,16 @@ fun loginPage() {
         )
 
         Spacer(modifier = Modifier.height(72.dp))
-        enterUserName()
+        EnterUserName(slipUiState.userName, {{ it: String? ->
+            listSlipViewModel.setUser(it.orEmpty())}})
 
         Spacer(modifier = Modifier.height(24.dp))
-        enterPassword()
+        EnterPassword()
 
         Spacer(modifier = Modifier.height(32.dp))
-        loginButton()
+        LoginButton()
 
-        forgotPasswordButton()
+        ForgotPasswordButton()
 
         Spacer(modifier = Modifier.height(128.dp))
     }
@@ -170,6 +171,6 @@ fun loginPage() {
 @Composable
 fun DefaultPreview() {
     MBCETSlipAppTheme() {
-        loginPage()
+        LoginPage()
     }
 }
