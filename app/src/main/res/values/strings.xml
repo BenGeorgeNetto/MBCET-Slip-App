@@ -3,8 +3,8 @@
 
 
     //Id Card Dummy Data
-    <string name="id_name">Adlu Rahman</string>
-    <string name="id">MBT1208</string>
+    <string name="id_name">Klarc Cent</string>  // Adding this as the universal dummy Name line 75
+    <string name="id">B21CS1234</string>   // Adding this as the universal dummy roll no line 88
     <string name="clas">CSE2021</string>
     <string name="adno">Admission No   :</string>
     <string name="dob">Date Of Birth     :</string>

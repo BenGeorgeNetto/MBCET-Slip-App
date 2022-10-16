@@ -12,19 +12,18 @@ private val DarkColorPalette = darkColors(
     onBackground = Grey1,
     primary = PrimDark,
     primaryVariant = Grey4,
-    secondary = Grey3,
-    surface = Cream,
-    onSurface = Grey9
+    secondary = Grey1,
+    surface = PrimDark,
+
 )
 
 private val LightColorPalette = lightColors(
     background = Grey2,
     onBackground = PrimDark,
-    primary = PrimGreen,
+    primary = PrimBlue,
     primaryVariant = Grey10,
     secondary = SecGrey1,
     onSecondary = Color.Black,
-    surface = SecViolet,
     onSurface = Grey2
 )
 
