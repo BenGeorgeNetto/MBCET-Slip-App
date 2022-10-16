@@ -25,18 +25,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.mbcetslipapp.NavigationItem
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.SlipHome
-import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
 fun EnterUserName() {

@@ -1,7 +1,4 @@
 package com.example.mbcetslipapp.screens
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mbcetslipapp.data.AllSlips
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
-
 
 
 @Preview(showBackground = true)

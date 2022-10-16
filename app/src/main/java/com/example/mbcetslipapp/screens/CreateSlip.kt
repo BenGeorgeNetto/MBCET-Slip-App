@@ -11,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -38,7 +37,6 @@ import com.example.mbcetslipapp.data.Slip
 import com.example.mbcetslipapp.data.slips
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 import java.text.SimpleDateFormat
-
 import java.util.*
 
 @Preview(showSystemUi = true)
