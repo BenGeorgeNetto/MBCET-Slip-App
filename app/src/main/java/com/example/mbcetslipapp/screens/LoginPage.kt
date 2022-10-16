@@ -106,7 +106,7 @@ fun LoginButton() {
     Button(
         onClick = { /*TODO*/ },
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.size(128.dp, 56.dp),
+        modifier = Modifier.size(150.dp, 48.dp),
         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.surface)
     ) {
         Text(
@@ -125,6 +125,19 @@ fun ForgotPasswordButton() {
     ) {
         Text(
             text = stringResource(R.string.forgot_password),
+            fontSize = 16.sp
+        )
+    }
+}
+
+@Composable
+fun SignUpButton() {
+    TextButton(
+        onClick = { /*TODO*/ },
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.background)
+    ) {
+        Text(
+            text = stringResource(R.string.sign_up_prompt),
             fontSize = 16.sp
         )
     }
@@ -157,8 +170,11 @@ fun LoginPage() {
 
         Spacer(modifier = Modifier.height(32.dp))
         LoginButton()
+        
+        Spacer(modifier = Modifier.height(32.dp))
 
         ForgotPasswordButton()
+        SignUpButton()
 
         Spacer(modifier = Modifier.height(128.dp))
     }
