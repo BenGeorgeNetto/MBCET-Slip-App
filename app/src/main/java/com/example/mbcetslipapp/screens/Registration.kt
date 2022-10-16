@@ -78,7 +78,7 @@ fun RegistrationScreen(navController: NavController) {
     val passwordErrorState = remember { mutableStateOf(false) }
     val confirmPasswordErrorState = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
-    Card(contentColor = MaterialTheme.colors.onSecondary,) {
+    Card(contentColor = MaterialTheme.colors.onBackground,) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -89,11 +89,9 @@ fun RegistrationScreen(navController: NavController) {
         ) {
 
             Text(text = buildAnnotatedString {
-                withStyle(style = SpanStyle(color = Color.Red)) {
-                    append("R")
-                }
-                withStyle(style = SpanStyle(color = Color.Black)) {
-                    append("egistration")
+
+                withStyle(style = SpanStyle(color = MaterialTheme.colors.onBackground)) {
+                    append("Registration")
                 }
             }, fontSize = 30.sp)
             Spacer(Modifier.size(16.dp))
@@ -113,7 +111,7 @@ fun RegistrationScreen(navController: NavController) {
                 },
             )
             if (nameErrorState.value) {
-                Text(text = "Required", color = Color.Red)
+                Text(text = "Required", color = MaterialTheme.colors.primary)
             }
             Spacer(Modifier.size(16.dp))
 
@@ -133,7 +131,7 @@ fun RegistrationScreen(navController: NavController) {
                 },
             )
             if (emailErrorState.value) {
-                Text(text = "Required", color = Color.Red)
+                Text(text = "Required", color = MaterialTheme.colors.primary)
             }
             Spacer(modifier = Modifier.size(16.dp))
             Row() {
@@ -191,14 +189,14 @@ fun RegistrationScreen(navController: NavController) {
                         Icon(
                             imageVector = if (passwordVisibility.value) Icons.Default.Check else Icons.Default.CheckCircle,
                             contentDescription = "visibility",
-                            tint = Color.Red
+                            tint = MaterialTheme.colors.primary
                         )
                     }
                 },
                 visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None
             )
             if (passwordErrorState.value) {
-                Text(text = "Required", color = Color.Red)
+                Text(text = "Required", color = MaterialTheme.colors.primary)
             }
 
             Spacer(Modifier.size(16.dp))
@@ -223,7 +221,7 @@ fun RegistrationScreen(navController: NavController) {
                         Icon(
                             imageVector = if (cPasswordVisibility.value) Icons.Default.CheckCircle else Icons.Default.Check,
                             contentDescription = "visibility",
-                            tint = Color.Red
+                            tint = MaterialTheme.colors.primary
                         )
                     }
                 },
@@ -237,7 +235,7 @@ fun RegistrationScreen(navController: NavController) {
                 } else {
                     ""
                 }
-                Text(text = msg, color = Color.Red)
+                Text(text = msg, color = MaterialTheme.colors.primary)
             }
             Spacer(Modifier.size(16.dp))
             Button(
@@ -275,7 +273,7 @@ fun RegistrationScreen(navController: NavController) {
                     Text(text = "Register", color = Color.White)
                 },
                 modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary)
             )
             Spacer(Modifier.size(16.dp))
             Row(
@@ -288,7 +286,7 @@ fun RegistrationScreen(navController: NavController) {
                         launchSingleTop = true
                     }
                 }) {
-                    Text(text = "Login", color = Color.Red)
+                    Text(text = "Login", color = MaterialTheme.colors.primary)
                 }
             }
         }
