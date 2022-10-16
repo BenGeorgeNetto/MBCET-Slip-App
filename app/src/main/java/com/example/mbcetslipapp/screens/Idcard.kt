@@ -153,7 +153,7 @@ fun IdCard() {
         {
             Spacer(Modifier.height(pad))
             Card(elevation = 1.dp,
-                contentColor = MaterialTheme.colors.primaryVariant,
+                contentColor = MaterialTheme.colors.onPrimary,
                 backgroundColor = MaterialTheme.colors.primary.copy(alpha=0.9f),
                 modifier = Modifier
                     .clip(shape)

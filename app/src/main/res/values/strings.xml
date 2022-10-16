@@ -3,15 +3,15 @@
 
 
     //Id Card Dummy Data
-    <string name="id_name">Klarc Cent</string>  // Adding this as the universal dummy Name line 75
-    <string name="id">B21CS1234</string>   // Adding this as the universal dummy roll no line 88
-    <string name="clas">CSE2021</string>
+    <string name="id_name">Rick Astley</string>  // Adding this as the universal dummy Name line 75
+    <string name="id">B20CS1169</string>   // Adding this as the universal dummy roll no line 88
+    <string name="clas">CSE2020</string>
     <string name="adno">Admission No   :</string>
     <string name="dob">Date Of Birth     :</string>
     <string name="bldgrp">Blood Group      :</string>
     <string name="phone">Phone Number  :</string>
-    <string name="adnod1">9217</string>
-    <string name="dobd1">06/05/2002</string>
+    <string name="adnod1">9669</string>
+    <string name="dobd1">06/09/2002</string>
     <string name="bldgrpd1">RED </string>
     <string name="phoned1">9876543210</string>
 
