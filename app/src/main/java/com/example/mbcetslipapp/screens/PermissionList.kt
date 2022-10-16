@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -14,26 +15,32 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.data.Slip
 import com.example.mbcetslipapp.data.slips
-import com.example.mbcetslipapp.ui.theme.PrimBlue
+import com.example.mbcetslipapp.ui.theme.PrimGreen
 import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
+import com.example.mbcetslipapp.ui.theme.PrimBlue
+import com.example.mbcetslipapp.ui.theme.SecOrange
+
 
 @Composable
 fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+    modifier = Modifier.background(color = MaterialTheme.colors.background)) {
         Row(modifier = Modifier.padding(8.dp)) {
             Button(onClick = {
                 listSlipViewModel.updateSelection("Requested")
             },
                 modifier = Modifier,
-                colors = ButtonDefaults.buttonColors(backgroundColor = PrimBlue)){
+                colors = ButtonDefaults.buttonColors(backgroundColor = SecOrange)){
                 Text(stringResource(id = R.string.requested))
             }
             Spacer(Modifier.weight(0.5f))
@@ -41,11 +48,17 @@ fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
                 listSlipViewModel.updateSelection("Approved")
             },
                 modifier = Modifier,
-                colors = ButtonDefaults.buttonColors(backgroundColor = PrimBlue)){
+                colors = ButtonDefaults.buttonColors(backgroundColor = PrimGreen)){
                 Text(stringResource(id = R.string.approved))
             }
         }
-        Text(text = slipUiState.selection)
+        Text(
+            text = slipUiState.selection,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colors.primaryVariant
+        )
+        Spacer(Modifier.height(5.dp))
         if(slipUiState.selection == "Requested")
             RequestedPermissionScreen()
         else
@@ -56,7 +69,7 @@ fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
 @Composable
 fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
-    LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
+    LazyColumn(modifier = Modifier) {
         items(slips)
         {
             if (!it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
@@ -68,7 +81,7 @@ fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()
 @Composable
 fun ApprovedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
-    LazyColumn(modifier = Modifier.background(MaterialTheme.colors.background)) {
+    LazyColumn(modifier = Modifier) {
         items(slips)
         {
             if (it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
@@ -83,9 +96,13 @@ fun SlipItem(slip: Slip, modifier: Modifier = Modifier, userType: String) {
     Card(
         elevation = 4.dp,
         modifier = modifier.padding(8.dp)
+
+            .clip(shape = RoundedCornerShape(25.dp,25.dp,20.dp,20.dp)),
+        contentColor = MaterialTheme.colors.onSurface
     ) {
         Column(
-            modifier = Modifier
+            modifier = Modifier.background(MaterialTheme.colors.primary.copy(alpha=0.9f))
+
                 .animateContentSize(
                     animationSpec = spring(
                         dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -129,15 +146,17 @@ fun SlipInfo(slip: Slip, userType: String) {
                 Text(
                     text = "Advisors: ",
                     modifier = Modifier.padding(vertical = 8.dp),
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colors.primaryVariant
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colors.onSurface
+
                 )
                 slip.advisors.forEach {
                     Text(
                         text = "$it, ",
                         modifier = Modifier.padding(vertical = 8.dp),
-                        fontSize = 12.sp,
-                        color = MaterialTheme.colors.primaryVariant
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colors.onSurface
+
                     )
                 }
             }
@@ -145,8 +164,9 @@ fun SlipInfo(slip: Slip, userType: String) {
                 text = "HoD: ${stringResource(id = slip.HoD)}",
                 modifier = Modifier.padding(
                     8.dp),
-                fontSize = 12.sp,
-                color = MaterialTheme.colors.primaryVariant
+                fontSize = 16.sp,
+                color = MaterialTheme.colors.onSurface
+
             )
         }
     }
@@ -156,15 +176,16 @@ fun SlipInfo(slip: Slip, userType: String) {
                 Text(
                     text = "S${slip.semester} ${slip.className}",
                     modifier = Modifier.padding(vertical = 8.dp),
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colors.primaryVariant
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colors.onSurface
                 )
                 Text(
                     text = ": ${slip.rollNo}",
                     modifier = Modifier.padding(
                         8.dp),
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colors.primaryVariant
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colors.onSurface
+
                 )
             }
         }
@@ -190,9 +211,9 @@ fun ApproveButton(
 fun SlipDescription(slipDescribe : String)
 {
     Text(
-        text = "Description: \n $slipDescribe",
+        text = "Description: \n \n $slipDescribe",
         modifier = Modifier.padding(8.dp),
-        fontSize = 13.sp,
+        fontSize = 16.sp,
         color = MaterialTheme.colors.primaryVariant
     )
 }
@@ -205,12 +226,16 @@ fun SlipData (name: String, title: String, type: String, userType: String)
         {
             Text(
                 text = title,
+                fontSize = 18.sp,
+                color = MaterialTheme.colors.onSurface,
                 modifier = Modifier.padding(8.dp)
             )
         }
         else {
             Text(
                 text = "$name: $title",
+                fontSize = 18.sp,
+                color = MaterialTheme.colors.onSurface,
                 modifier = Modifier.padding(8.dp)
             )
         }
@@ -218,7 +243,7 @@ fun SlipData (name: String, title: String, type: String, userType: String)
             text = type,
             color = MaterialTheme.colors.primaryVariant,
             modifier = Modifier.padding(8.dp),
-            fontSize = 14.sp,
+            fontSize = 16.sp,
         )
     }
 }

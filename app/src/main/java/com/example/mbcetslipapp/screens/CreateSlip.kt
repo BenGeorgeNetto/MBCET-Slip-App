@@ -1,6 +1,7 @@
 package com.example.mbcetslipapp.screens
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -40,8 +41,8 @@ import java.util.*
 @Composable
 fun SlipCreateTopBar() {
     TopAppBar(
-        backgroundColor = Color.Black,
-        contentColor = Color.White,
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = MaterialTheme.colors.onBackground,
         title = {
             Text(
                 text = stringResource(R.string.CreateASlip),
@@ -65,7 +66,7 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
     val scroll = rememberScrollState(0)
     Scaffold(
         topBar = { SlipCreateTopBar() },
-        backgroundColor = Color.Black,
+        backgroundColor = MaterialTheme.colors.background,
         ) {
         Card(
             elevation = 12.dp,
@@ -74,6 +75,7 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 .padding(all = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
                 .fillMaxSize()
+
         ) {
             Column(
                 modifier = Modifier
@@ -189,15 +191,17 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 }
                 Spacer(modifier = Modifier.height(30.dp))
                 val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+                val bg =MaterialTheme.colors.background
+                val bg2=MaterialTheme.colors.onSurface
                 Canvas(
                     Modifier
                         .fillMaxWidth()
                         .height(10.dp)
                 ) {
-                    drawCircle(Color.Black, 50f, center = Offset(-50f, 0f))
-                    drawCircle(Color.Black, 50f, center = Offset(size.width + 50f, 0f))
+                    drawCircle(bg, 50f, center = Offset(-50f, 0f))
+                    drawCircle(bg, 50f, center = Offset(size.width + 50f, 0f))
                     drawLine(
-                        color = Color.DarkGray,
+                        color = bg2,
                         strokeWidth = 20f,
                         start = Offset(0f, 0f),
                         end = Offset(size.width, 0f),
