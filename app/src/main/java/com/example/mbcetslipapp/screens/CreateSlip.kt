@@ -60,191 +60,164 @@ fun CreateSlipDarkPreview() {
 @Composable
 fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
     val scroll = rememberScrollState(0)
-    Scaffold(
-        topBar = { SlipCreateTopBar() },
-        backgroundColor = Color(0xFF333333),
+    Card(
+        backgroundColor = MaterialTheme.colors.background,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 20.dp)
     ) {
-        Card(
-            backgroundColor = Color(0xFF333333),
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(all = 20.dp)
-            ) {
-            Column(
+                .background(color = MaterialTheme.colors.secondary)
+                .clip(RoundedCornerShape(40.dp))
+                .padding(horizontal = 20.dp)
+                .verticalScroll(scroll, reverseScrolling = true)
+        ) {
+            Spacer(modifier = Modifier.height(10.dp))
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = MaterialTheme.colors.secondary)
-                    .clip(RoundedCornerShape(40.dp))
-                    .padding(horizontal = 20.dp)
-                    .verticalScroll(scroll, reverseScrolling = true)
+                    .fillMaxWidth()
             ) {
-                Spacer(modifier = Modifier.height(10.dp))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
+                TypeSelectorDropdown(model)
+                val sdf = SimpleDateFormat("dd/MM/yyyy")
+                val currentDateAndTime = sdf.format(Date())
+                Box(
+                    contentAlignment = Alignment.Center,
                 ) {
-                    TypeSelectorDropdown(model)
-                    val sdf = SimpleDateFormat("dd/MM/yyyy")
-                    val currentDateAndTime = sdf.format(Date())
-                    Box(
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(
-                            text = currentDateAndTime,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = stringResource(R.string.FillUpSlipDetails),
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Gray
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-                Divider(
-                    thickness = 2.dp,
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(
-                    text = stringResource(R.string.Name),
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Gray
-                )
-                Text(
-                    text = stringResource(id =R.string.id_name),
-                    fontWeight = FontWeight.Bold,
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.RegNo),
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Gray
-                        )
-                        Text(
-                            text = stringResource(id =R.string.id),
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
-                    Box(
-                        Modifier.weight(2f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column {
-                            Text(
-                                text = stringResource(R.string.AdmnNo),
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Gray
-                            )
-                            Text(
-                                text = stringResource(id = R.string.adnod1),
-                                fontWeight = FontWeight.Bold,
-                            )
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.ClassTitle),
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Gray
-                        )
-                        Text(
-                            text = stringResource(R.string.CS1),
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Box(
-                        Modifier.weight(2f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column {
-                            Text(
-                                text = stringResource(R.string.SemesterTitle),
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Gray
-                            )
-                            Text(
-                                text = stringResource(R.string.semester),
-                                fontWeight = FontWeight.Bold,
-                            )
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(30.dp))
-                val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-                val bg = Color(0xFF333333)
-                val bg2 = Color.Black
-
-                Canvas(
-                    Modifier
-                        .fillMaxWidth()
-                        .height(10.dp)
-                ) {
-                    drawCircle(bg, 100f, center = Offset(-100f, 0f))
-                    drawCircle(bg, 100f, center = Offset(size.width + 100f, 0f))
-                    drawLine(
-                        color = bg2,
-                        strokeWidth = 30f,
-                        start = Offset(0f, 0f),
-                        end = Offset(size.width, 0f),
-                        pathEffect = pathEffect
+                    Text(
+                        text = currentDateAndTime,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
-                Spacer(modifier = Modifier.height(30.dp))
-                InputFields(model)
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = stringResource(R.string.CreateSlipFooter),
-                    textAlign = TextAlign.Center,
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 10.dp)
-                )
-                Spacer(modifier = Modifier.height(10.dp))
             }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = stringResource(R.string.FillUpSlipDetails),
+                fontWeight = FontWeight.Bold,
+                color = Color.Gray
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Divider(
+                thickness = 2.dp,
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = stringResource(R.string.Name),
+                fontWeight = FontWeight.Bold,
+                color = Color.Gray
+            )
+            Text(
+                text = stringResource(id = R.string.id_name),
+                fontWeight = FontWeight.Bold,
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.RegNo),
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray
+                    )
+                    Text(
+                        text = stringResource(id = R.string.id),
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+                Box(
+                    Modifier.weight(2f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.AdmnNo),
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray
+                        )
+                        Text(
+                            text = stringResource(id = R.string.adnod1),
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = stringResource(R.string.ClassTitle),
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray
+                    )
+                    Text(
+                        text = stringResource(R.string.CS1),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Box(
+                    Modifier.weight(2f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.SemesterTitle),
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray
+                        )
+                        Text(
+                            text = stringResource(R.string.semester),
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(30.dp))
+            val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+            val bg = MaterialTheme.colors.background
+            val bg2 = Color.Black
+
+            Canvas(
+                Modifier
+                    .fillMaxWidth()
+                    .height(10.dp)
+            ) {
+                drawCircle(bg, 100f, center = Offset(-100f, 0f))
+                drawCircle(bg, 100f, center = Offset(size.width + 100f, 0f))
+                drawLine(
+                    color = bg2,
+                    strokeWidth = 30f,
+                    start = Offset(0f, 0f),
+                    end = Offset(size.width, 0f),
+                    pathEffect = pathEffect
+                )
+            }
+            Spacer(modifier = Modifier.height(30.dp))
+            InputFields(model)
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = stringResource(R.string.CreateSlipFooter),
+                textAlign = TextAlign.Center,
+                color = Color.Gray,
+                fontSize = 12.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
 
 //Components
-@Composable
-fun SlipCreateTopBar() {
-    TopAppBar(
-        backgroundColor = Color(0xFF333333),
-        contentColor = Color(0xFFF2F2F2),
-        title = {
-            Text(
-                text = stringResource(R.string.CreateASlip),
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = { }) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = "back",
-                )
-            }
-        },
-    )
-}
-
-
 @Composable
 fun AppTextField(
     modifier: Modifier = Modifier,
@@ -277,7 +250,6 @@ fun AppTextField(
         }
     )
 }
-
 
 
 @Composable
@@ -423,23 +395,28 @@ fun InputFields(
 //            if(viewModel.sendToAdvisors) {
 //                var classAdvisors = listOf(R.string.advisor_1, R.string.advisor_2, R.string.advisor_3)
 //            }
-            slips.add(Slip(
-                name= R.string.id_name,
-                slipType = viewModel.slipType,
-                className = R.string.CS1,
-                HoD = deptHOD,
-                advisors = classAdvisors,
-                semester = R.string.semester,
-                rollNo = R.string.id,
-                title = viewModel.title,
-                slipDescribe = viewModel.description))
+            slips.add(
+                Slip(
+                    name = R.string.id_name,
+                    slipType = viewModel.slipType,
+                    className = R.string.CS1,
+                    HoD = deptHOD,
+                    advisors = classAdvisors,
+                    semester = R.string.semester,
+                    rollNo = R.string.id,
+                    title = viewModel.title,
+                    slipDescribe = viewModel.description
+                )
+            )
         },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 30.dp)
             .height(40.dp)
     ) {
-        Text(text = stringResource(R.string.SubmitButtomText),
-            fontSize = 20.sp)
+        Text(
+            text = stringResource(R.string.SubmitButtomText),
+            fontSize = 20.sp
+        )
     }
 }
