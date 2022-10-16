@@ -399,7 +399,7 @@ fun InputFields(
                     slipType = viewModel.slipType,
                     className = R.string.CS1,
                     HoD = deptHOD,
-                    advisors = classAdvisors,
+                    advisors = listOf( "Dr. Dumbledore", "Mr. Gandalf"),
                     semester = R.string.semester,
                     rollNo = R.string.id,
                     title = viewModel.title,

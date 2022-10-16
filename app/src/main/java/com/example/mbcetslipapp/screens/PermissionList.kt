@@ -32,7 +32,7 @@ import com.example.mbcetslipapp.ui.theme.*
 fun PermissionScreen(listSlipViewModel: ListSlipViewModel = setUserExtrernal("Rick Astley", viewModel())) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = Modifier.background(color = MaterialTheme.colors.background)) {
+        modifier = Modifier.background(color = MaterialTheme.colors.background)) {
         Row(modifier = Modifier.padding(8.dp)) {
             Button(onClick = {
                 listSlipViewModel.updateSelection("Requested")
@@ -150,7 +150,7 @@ fun SlipInfo(slip: Slip, userType: String) {
                 )
                 slip.advisors.forEach {
                     Text(
-                        text = "${stringResource(id=it)}, ",
+                        text = it,
                         modifier = Modifier.padding(vertical = 8.dp),
                         fontSize = 16.sp,
                         color = MaterialTheme.colors.onSurface
