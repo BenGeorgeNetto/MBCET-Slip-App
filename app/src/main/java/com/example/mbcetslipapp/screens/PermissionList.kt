@@ -20,18 +20,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.data.Slip
 import com.example.mbcetslipapp.data.slips
-import com.example.mbcetslipapp.ui.theme.PrimGreen
-import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
-import com.example.mbcetslipapp.ui.theme.PrimBlue
-import com.example.mbcetslipapp.ui.theme.SecOrange
+import com.example.mbcetslipapp.ui.theme.*
 
 
 @Composable
-fun PermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()) {
+fun PermissionScreen(listSlipViewModel: ListSlipViewModel = setUserExtrernal("Rick Astley", viewModel())) {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(horizontalAlignment = Alignment.CenterHorizontally,
     modifier = Modifier.background(color = MaterialTheme.colors.background)) {
@@ -72,7 +70,7 @@ fun RequestedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel()
     LazyColumn(modifier = Modifier) {
         items(slips)
         {
-            if (!it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
+            if (!it.status.value)
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -84,7 +82,7 @@ fun ApprovedPermissionScreen(listSlipViewModel: ListSlipViewModel = viewModel())
     LazyColumn(modifier = Modifier) {
         items(slips)
         {
-            if (it.status.value && (stringResource(id = it.rollNo) == slipUiState.studentRoll || slipUiState.userType != "Student"))
+            if (it.status.value)
                 SlipItem(slip = it, userType = slipUiState.userType)
         }
     }
@@ -152,7 +150,7 @@ fun SlipInfo(slip: Slip, userType: String) {
                 )
                 slip.advisors.forEach {
                     Text(
-                        text = "$it, ",
+                        text = "${stringResource(id=it)}, ",
                         modifier = Modifier.padding(vertical = 8.dp),
                         fontSize = 16.sp,
                         color = MaterialTheme.colors.onSurface
@@ -174,13 +172,13 @@ fun SlipInfo(slip: Slip, userType: String) {
         Column() {
             Row(modifier = Modifier.padding(horizontal = 8.dp)) {
                 Text(
-                    text = "S${slip.semester} ${slip.className}",
+                    text = "S${stringResource(id=slip.semester)} ${stringResource(id = slip.className)}",
                     modifier = Modifier.padding(vertical = 8.dp),
                     fontSize = 16.sp,
                     color = MaterialTheme.colors.onSurface
                 )
                 Text(
-                    text = ": ${slip.rollNo}",
+                    text = ": ${stringResource(id = slip.rollNo)}",
                     modifier = Modifier.padding(
                         8.dp),
                     fontSize = 16.sp,

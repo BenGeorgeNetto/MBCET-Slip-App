@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mbcetslipapp.data.AllSlips
 import com.example.mbcetslipapp.screens.*
@@ -40,7 +41,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @Composable
 fun SlipApp() {
     Login()
@@ -48,7 +48,7 @@ fun SlipApp() {
 
 
 @Composable
-fun SlipHome() {
+fun SlipHome(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -57,7 +57,7 @@ fun SlipHome() {
         modifier = Modifier,
         content = { padding ->
             Box() {
-                Navigation(navController = navController)
+                Navigation(navController = navController, listSlipViewModel)
             }
         }
     )
@@ -65,7 +65,7 @@ fun SlipHome() {
 }
 
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, listSlipViewModel: ListSlipViewModel) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
             HomeScreenStudent()
@@ -74,7 +74,7 @@ fun Navigation(navController: NavHostController) {
             CreateSlipLayout()
         }
         composable(NavigationItem.Slips.route) {
-            PermissionScreen()
+            PermissionScreen(listSlipViewModel)
         }
         composable(NavigationItem.Wifi.route) {
             ItmsWifiSlip()
