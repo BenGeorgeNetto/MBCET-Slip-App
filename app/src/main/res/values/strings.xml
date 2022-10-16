@@ -53,6 +53,7 @@
     <string name="CreateSlipFooter">*This slip will submitted for approval to your department faculties</string>
     <string name="GatePass">Gate Pass</string>
     <string name="IDCardDuplicate">ID Card Duplicate</string>
+    <string name="ExtraClassRequest">Extra class request</string>
     <string name="LabAccessRequest">Lab access request</string>
     <string name="ExamGrievances">Exam Grievances</string>
     <string name="Misc">Misc</string>
@@ -129,4 +130,5 @@
     <string name="Mithra">Staff Advisor : Mithra Kumar</string>
     <string name="Revathy">HOD : Revathy Singh</string>
     <string name="Bindu">Staff Advisor : Bindu Reji</string>
+    <string name="SelectType">Select Type</string>
 </resources>
