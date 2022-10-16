@@ -73,216 +73,218 @@ fun RegistrationScreen(navController: NavController) {
     val passwordErrorState = remember { mutableStateOf(false) }
     val confirmPasswordErrorState = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .background(MaterialTheme.colors.primary)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-    ) {
+    Card(contentColor = MaterialTheme.colors.onSecondary,) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .background(MaterialTheme.colors.background)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+        ) {
 
-        Text(text = buildAnnotatedString {
-            withStyle(style = SpanStyle(color = Color.Red)) {
-                append("R")
-            }
-            withStyle(style = SpanStyle(color = Color.Black)) {
-                append("egistration")
-            }
-        }, fontSize = 30.sp)
-        Spacer(Modifier.size(16.dp))
-        OutlinedTextField(
-            value = name.value,
-            onValueChange = {
-                if (nameErrorState.value) {
-                    nameErrorState.value = false
+            Text(text = buildAnnotatedString {
+                withStyle(style = SpanStyle(color = Color.Red)) {
+                    append("R")
                 }
-                name.value = it
-            },
-
-            modifier = Modifier.fillMaxWidth(),
-            isError = nameErrorState.value,
-            label = {
-                Text(text = "Name*")
-            },
-        )
-        if (nameErrorState.value) {
-            Text(text = "Required", color = Color.Red)
-        }
-        Spacer(Modifier.size(16.dp))
-
-        OutlinedTextField(
-            value = email.value,
-            onValueChange = {
-                if (emailErrorState.value) {
-                    emailErrorState.value = false
+                withStyle(style = SpanStyle(color = Color.Black)) {
+                    append("egistration")
                 }
-                email.value = it
-            },
-
-            modifier = Modifier.fillMaxWidth(),
-            isError = emailErrorState.value,
-            label = {
-                Text(text = "MBCET Email*")
-            },
-        )
-        if (emailErrorState.value) {
-            Text(text = "Required", color = Color.Red)
-        }
-        Spacer(modifier = Modifier.size(16.dp))
-        Row() {
+            }, fontSize = 30.sp)
+            Spacer(Modifier.size(16.dp))
             OutlinedTextField(
-                value = mbcetID.value,
+                value = name.value,
                 onValueChange = {
-
-                    mbcetID.value = it
+                    if (nameErrorState.value) {
+                        nameErrorState.value = false
+                    }
+                    name.value = it
                 },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    autoCorrect = false
-                ),
-                modifier = Modifier.fillMaxWidth(0.3f),
+
+                modifier = Modifier.fillMaxWidth(),
+                isError = nameErrorState.value,
                 label = {
-                    Text(text = "MBCET ID")
+                    Text(text = "Name*")
                 },
             )
+            if (nameErrorState.value) {
+                Text(text = "Required", color = Color.Red)
+            }
+            Spacer(Modifier.size(16.dp))
+
+            OutlinedTextField(
+                value = email.value,
+                onValueChange = {
+                    if (emailErrorState.value) {
+                        emailErrorState.value = false
+                    }
+                    email.value = it
+                },
+
+                modifier = Modifier.fillMaxWidth(),
+                isError = emailErrorState.value,
+                label = {
+                    Text(text = "MBCET Email*")
+                },
+            )
+            if (emailErrorState.value) {
+                Text(text = "Required", color = Color.Red)
+            }
             Spacer(modifier = Modifier.size(16.dp))
-            OutlinedTextField(
-                value = mobileNo.value,
-                onValueChange = {
+            Row() {
+                OutlinedTextField(
+                    value = mbcetID.value,
+                    onValueChange = {
 
-                    mobileNo.value = it
-                },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Phone,
-                    autoCorrect = false
-                ),
-                label = {
-                    Text(text = "Mobile No")
-                },
-            )
-        }
+                        mbcetID.value = it
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        autoCorrect = false
+                    ),
+                    modifier = Modifier.fillMaxWidth(0.3f),
+                    label = {
+                        Text(text = "MBCET ID")
+                    },
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+                OutlinedTextField(
+                    value = mobileNo.value,
+                    onValueChange = {
 
-        Spacer(Modifier.size(16.dp))
-        val passwordVisibility = remember { mutableStateOf(true) }
-        OutlinedTextField(
-            value = password.value,
-            onValueChange = {
-                if (passwordErrorState.value) {
-                    passwordErrorState.value = false
-                }
-                password.value = it
-            },
-            modifier = Modifier.fillMaxWidth(),
-            label = {
-                Text(text = "Password*")
-            },
-            isError = passwordErrorState.value,
-            trailingIcon = {
-                IconButton(onClick = {
-                    passwordVisibility.value = !passwordVisibility.value
-                }) {
-                    Icon(
-                        imageVector = if (passwordVisibility.value) Icons.Default.Check else Icons.Default.CheckCircle,
-                        contentDescription = "visibility",
-                        tint = Color.Red
-                    )
-                }
-            },
-            visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None
-        )
-        if (passwordErrorState.value) {
-            Text(text = "Required", color = Color.Red)
-        }
-
-        Spacer(Modifier.size(16.dp))
-        val cPasswordVisibility = remember { mutableStateOf(true) }
-        OutlinedTextField(
-            value = confirmPassword.value,
-            onValueChange = {
-                if (confirmPasswordErrorState.value) {
-                    confirmPasswordErrorState.value = false
-                }
-                confirmPassword.value = it
-            },
-            modifier = Modifier.fillMaxWidth(),
-            isError = confirmPasswordErrorState.value,
-            label = {
-                Text(text = "Confirm Password*")
-            },
-            trailingIcon = {
-                IconButton(onClick = {
-                    cPasswordVisibility.value = !cPasswordVisibility.value
-                }) {
-                    Icon(
-                        imageVector = if (cPasswordVisibility.value) Icons.Default.CheckCircle else Icons.Default.Check,
-                        contentDescription = "visibility",
-                        tint = Color.Red
-                    )
-                }
-            },
-            visualTransformation = if (cPasswordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None
-        )
-        if (confirmPasswordErrorState.value) {
-            val msg = if (confirmPassword.value.text.isEmpty()) {
-                "Required"
-            } else if (confirmPassword.value.text != password.value.text) {
-                "Password not matching"
-            } else {
-                ""
+                        mobileNo.value = it
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Phone,
+                        autoCorrect = false
+                    ),
+                    label = {
+                        Text(text = "Mobile No")
+                    },
+                )
             }
-            Text(text = msg, color = Color.Red)
-        }
-        Spacer(Modifier.size(16.dp))
-        Button(
-            onClick = {
-                when {
-                    name.value.text.isEmpty() -> {
-                        nameErrorState.value = true
+
+            Spacer(Modifier.size(16.dp))
+            val passwordVisibility = remember { mutableStateOf(true) }
+            OutlinedTextField(
+                value = password.value,
+                onValueChange = {
+                    if (passwordErrorState.value) {
+                        passwordErrorState.value = false
                     }
-                    email.value.text.isEmpty() -> {
-                        emailErrorState.value = true
+                    password.value = it
+                },
+                modifier = Modifier.fillMaxWidth(),
+                label = {
+                    Text(text = "Password*")
+                },
+                isError = passwordErrorState.value,
+                trailingIcon = {
+                    IconButton(onClick = {
+                        passwordVisibility.value = !passwordVisibility.value
+                    }) {
+                        Icon(
+                            imageVector = if (passwordVisibility.value) Icons.Default.Check else Icons.Default.CheckCircle,
+                            contentDescription = "visibility",
+                            tint = Color.Red
+                        )
                     }
-                    password.value.text.isEmpty() -> {
-                        passwordErrorState.value = true
+                },
+                visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None
+            )
+            if (passwordErrorState.value) {
+                Text(text = "Required", color = Color.Red)
+            }
+
+            Spacer(Modifier.size(16.dp))
+            val cPasswordVisibility = remember { mutableStateOf(true) }
+            OutlinedTextField(
+                value = confirmPassword.value,
+                onValueChange = {
+                    if (confirmPasswordErrorState.value) {
+                        confirmPasswordErrorState.value = false
                     }
-                    confirmPassword.value.text.isEmpty() -> {
-                        confirmPasswordErrorState.value = true
+                    confirmPassword.value = it
+                },
+                modifier = Modifier.fillMaxWidth(),
+                isError = confirmPasswordErrorState.value,
+                label = {
+                    Text(text = "Confirm Password*")
+                },
+                trailingIcon = {
+                    IconButton(onClick = {
+                        cPasswordVisibility.value = !cPasswordVisibility.value
+                    }) {
+                        Icon(
+                            imageVector = if (cPasswordVisibility.value) Icons.Default.CheckCircle else Icons.Default.Check,
+                            contentDescription = "visibility",
+                            tint = Color.Red
+                        )
                     }
-                    confirmPassword.value.text != password.value.text -> {
-                        confirmPasswordErrorState.value = true
-                    }
-                    else -> {
-                        Toast.makeText(
-                            context,
-                            "Registered successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        navController.navigate("login_screen") {
-                            popUpTo(navController.graph.startDestinationId)
-                            launchSingleTop = true
+                },
+                visualTransformation = if (cPasswordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None
+            )
+            if (confirmPasswordErrorState.value) {
+                val msg = if (confirmPassword.value.text.isEmpty()) {
+                    "Required"
+                } else if (confirmPassword.value.text != password.value.text) {
+                    "Password not matching"
+                } else {
+                    ""
+                }
+                Text(text = msg, color = Color.Red)
+            }
+            Spacer(Modifier.size(16.dp))
+            Button(
+                onClick = {
+                    when {
+                        name.value.text.isEmpty() -> {
+                            nameErrorState.value = true
+                        }
+                        email.value.text.isEmpty() -> {
+                            emailErrorState.value = true
+                        }
+                        password.value.text.isEmpty() -> {
+                            passwordErrorState.value = true
+                        }
+                        confirmPassword.value.text.isEmpty() -> {
+                            confirmPasswordErrorState.value = true
+                        }
+                        confirmPassword.value.text != password.value.text -> {
+                            confirmPasswordErrorState.value = true
+                        }
+                        else -> {
+                            Toast.makeText(
+                                context,
+                                "Registered successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            navController.navigate("login_screen") {
+                                popUpTo(navController.graph.startDestinationId)
+                                launchSingleTop = true
+                            }
                         }
                     }
+                },
+                content = {
+                    Text(text = "Register", color = Color.White)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
+            )
+            Spacer(Modifier.size(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                TextButton(onClick = {
+                    navController.navigate("home") {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                }) {
+                    Text(text = "Login", color = Color.Red)
                 }
-            },
-            content = {
-                Text(text = "Register", color = Color.White)
-            },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
-        )
-        Spacer(Modifier.size(16.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            TextButton(onClick = {
-                navController.navigate("home") {
-                    popUpTo(navController.graph.startDestinationId)
-                    launchSingleTop = true
-                }
-            }) {
-                Text(text = "Login", color = Color.Red)
             }
         }
     }
