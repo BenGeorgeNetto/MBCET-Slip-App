@@ -52,7 +52,7 @@ fun EnterUserName() {
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = MaterialTheme.colors.primary,
-            unfocusedBorderColor = MaterialTheme.colors.surface
+            unfocusedBorderColor = MaterialTheme.colors.onBackground
         ),
     )
 }
@@ -89,7 +89,7 @@ fun EnterPassword() {
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = MaterialTheme.colors.primary,
-            unfocusedBorderColor = MaterialTheme.colors.surface,
+            unfocusedBorderColor = MaterialTheme.colors.onBackground,
         ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password,
@@ -140,7 +140,7 @@ fun LoginPage() {
             .fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.templogo),
+            painter = painterResource(id = R.drawable.frame_99__1_),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
