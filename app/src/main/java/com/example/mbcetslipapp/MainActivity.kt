@@ -6,15 +6,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.mbcetslipapp.data.AllSlips
 import com.example.mbcetslipapp.screens.*
-import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
+import com.example.mbcetslipapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +40,10 @@ fun SlipApp() {
 
 @Composable
 fun SlipHome() {
-
     Scaffold(
+        bottomBar = { BottomNavigationBar() },
+        backgroundColor = MaterialTheme.colors.background,
         modifier = Modifier
-            .background(MaterialTheme.colors.background)
     ) {
         IdCard()
     }
@@ -64,8 +64,32 @@ fun TopAppBar() {
 }
 
 @Composable
-fun BottomNavBar() {
-    // to define bottom navigation bar
+fun BottomNavigationBar() {
+    val items = listOf(
+        NavigationItem.Home,
+        NavigationItem.Add,
+        NavigationItem.Slips,
+        NavigationItem.ID
+    )
+    BottomNavigation(
+        backgroundColor = Grey8,
+        contentColor = Grey1,
+        elevation = 4.dp
+    ) {
+        items.forEach { item ->
+            BottomNavigationItem(
+                icon = { item.icon },
+                label = { Text(item.title) },
+                selectedContentColor = PrimGreen,
+                unselectedContentColor = PrimCream,
+                alwaysShowLabel = true,
+                selected = false,
+                onClick = {
+
+                }
+            )
+        }
+    }
 }
 
 @Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
