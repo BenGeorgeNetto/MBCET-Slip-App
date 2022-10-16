@@ -27,19 +27,23 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.SlipHome
+import com.example.mbcetslipapp.ui.theme.ListSlipViewModel
+import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
-fun EnterUserName() {
-    var username by remember { mutableStateOf("") }
+fun EnterUserName(listSlipViewModel: ListSlipViewModel, onChange: (String) -> Unit) {
+    var username by remember { mutableStateOf(listSlipViewModel.uiState.value.userName) }
     OutlinedTextField(
         value = username,
-        onValueChange = { username = it },
+        onValueChange = { username = it
+                        onChange},
         singleLine = true,
         leadingIcon = {
             IconButton(onClick = { /*TODO*/ }) {
@@ -154,13 +158,13 @@ fun SignUpButton(navController: NavController) {
 }
 
 @Composable
-fun Login() {
+fun Login(listSlipViewModel: ListSlipViewModel = viewModel()) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login", builder = {
         composable(
             "login",
-            content = { LoginPage(navController) }
+            content = { LoginPage(navController, listSlipViewModel, {listSlipViewModel.setUser(it.orEmpty())}) }
         )
         composable(
             "register_screen",
@@ -168,14 +172,14 @@ fun Login() {
         )
         composable(
             "home",
-            content = { SlipHome() }
+            content = { SlipHome(listSlipViewModel) }
         )
     })
 }
 
 
 @Composable
-fun LoginPage(navController: NavController) {
+fun LoginPage(navController: NavController, listSlipViewModel: ListSlipViewModel, onChange: (String?) -> Unit) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -196,14 +200,16 @@ fun LoginPage(navController: NavController) {
         )
 
         Spacer(modifier = Modifier.height(72.dp))
-        EnterUserName()
+        EnterUserName(listSlipViewModel,
+            onChange = onChange
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
         EnterPassword()
 
         Spacer(modifier = Modifier.height(32.dp))
         LoginButton(navController)
-        
+
         Spacer(modifier = Modifier.height(32.dp))
 
         ForgotPasswordButton()

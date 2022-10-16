@@ -24,4 +24,14 @@ class ListSlipViewModel: ViewModel() {
         val user = _uiState.value.userType
         _uiState.value = SlipUiState(user,type)
     }
+    fun setUser(userName: String)
+    {
+        _uiState.value = SlipUiState(userType = if(userName == "Rick Astley") {"HoD"} else {"Student"}, selection = "Requested", userName = userName)
+    }
+}
+
+fun setUserExtrernal(userName: String, listSlipViewModel: ListSlipViewModel): ListSlipViewModel
+{
+    listSlipViewModel.setUser(userName)
+    return listSlipViewModel
 }
