@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -134,7 +135,8 @@ fun IdCard() {
 
     Box(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(MaterialTheme.colors.secondary),
         contentAlignment = Alignment.TopCenter,
     ) {
         Image(
@@ -152,7 +154,7 @@ fun IdCard() {
             Spacer(Modifier.height(pad))
             Card(elevation = 1.dp,
                 contentColor = MaterialTheme.colors.primaryVariant,
-                backgroundColor = MaterialTheme.colors.onSurface.copy(alpha=0.7f),
+                backgroundColor = MaterialTheme.colors.primary.copy(alpha=0.9f),
                 modifier = Modifier
                     .clip(shape)
                     .fillMaxWidth())
