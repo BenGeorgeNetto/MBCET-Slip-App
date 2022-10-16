@@ -27,11 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.SlipViewModel
+import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -396,3 +398,12 @@ fun InputFields(
         fontSize = 20.sp)
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun CreateSlipLightPreview() {
+    MBCETSlipAppTheme {
+        CreateSlipLayout()
+    }
+}
+

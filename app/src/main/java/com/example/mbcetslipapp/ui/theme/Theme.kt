@@ -1,5 +1,6 @@
 package com.example.mbcetslipapp.ui.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -7,24 +8,27 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+@SuppressLint("ConflictingOnColor")
 private val DarkColorPalette = darkColors(
     background = Grey10,
     onBackground = Grey1,
     primary = PrimDark,
-    primaryVariant = Grey4,
+//    primaryVariant = Grey9,
     secondary = Grey1,
     surface = PrimDark,
-
+    onSurface = Grey2,
+    onPrimary = Grey1,
 )
 
 private val LightColorPalette = lightColors(
     background = Grey2,
     onBackground = PrimDark,
     primary = PrimBlue,
-    primaryVariant = Grey10,
+//    primaryVariant = SecViolet,
+    onPrimary = Grey1,
     secondary = SecGrey1,
-    onSecondary = Color.Black,
-    onSurface = Grey2
+    onSecondary = Grey9,
+    surface = PrimBlue,
 )
 
 @Composable
