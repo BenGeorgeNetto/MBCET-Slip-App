@@ -1,6 +1,7 @@
 package com.example.mbcetslipapp.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -27,7 +28,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.mbcetslipapp.NavigationItem
 import com.example.mbcetslipapp.R
+import com.example.mbcetslipapp.SlipHome
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Composable
@@ -102,9 +110,13 @@ fun EnterPassword() {
 }
 
 @Composable
-fun LoginButton() {
+fun LoginButton(navController: NavController) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+            navController.navigate("home") {
+                popUpTo("login") { inclusive = true }
+            }
+        },
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier.size(150.dp, 48.dp),
         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.surface)
@@ -131,9 +143,11 @@ fun ForgotPasswordButton() {
 }
 
 @Composable
-fun SignUpButton() {
+fun SignUpButton(navController: NavController) {
     TextButton(
-        onClick = { /*TODO*/ },
+        onClick = { navController.navigate("register_screen") {
+            popUpTo("login")
+        } },
         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.background)
     ) {
         Text(
@@ -144,13 +158,36 @@ fun SignUpButton() {
 }
 
 @Composable
-fun LoginPage() {
+fun Login() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "login", builder = {
+        composable(
+            "login",
+            content = { LoginPage(navController) }
+        )
+        composable(
+            "register_screen",
+            content = { LoginAndRegistration() }
+        )
+        composable(
+            "home",
+            content = { SlipHome() }
+        )
+    })
+}
+
+
+@Composable
+fun LoginPage(navController: NavController) {
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxSize()
+            .background(MaterialTheme.colors.background)
     ) {
         Image(
             painter = painterResource(id = R.drawable.frame_99__1_),
@@ -169,21 +206,21 @@ fun LoginPage() {
         EnterPassword()
 
         Spacer(modifier = Modifier.height(32.dp))
-        LoginButton()
+        LoginButton(navController)
         
         Spacer(modifier = Modifier.height(32.dp))
 
         ForgotPasswordButton()
-        SignUpButton()
+        SignUpButton(navController)
 
         Spacer(modifier = Modifier.height(128.dp))
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    MBCETSlipAppTheme() {
-        LoginPage()
-    }
-}
+//@Preview(showSystemUi = true)
+//@Composable
+//fun DefaultPreview() {
+//    MBCETSlipAppTheme() {
+//        LoginPage()
+//    }
+//}

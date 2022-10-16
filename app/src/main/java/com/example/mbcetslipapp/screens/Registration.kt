@@ -6,6 +6,7 @@ import android.widget.Space
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -36,6 +37,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mbcetslipapp.SlipHome
 
 @Composable
 fun LoginAndRegistration() {
@@ -44,7 +46,12 @@ fun LoginAndRegistration() {
     NavHost(navController = navController, startDestination = "register_screen", builder = {
         composable(
             "register_screen",
-            content = { RegistrationScreen(navController = navController) })
+            content = { RegistrationScreen(navController = navController) }
+        )
+        composable(
+            "home",
+            content = { SlipHome() }
+        )
     })
 }
 
@@ -69,8 +76,9 @@ fun RegistrationScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(scrollState),
+            .verticalScroll(scrollState)
+            .background(MaterialTheme.colors.primary)
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
     ) {
 
@@ -269,7 +277,7 @@ fun RegistrationScreen(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             TextButton(onClick = {
-                navController.navigate("login_screen") {
+                navController.navigate("home") {
                     popUpTo(navController.graph.startDestinationId)
                     launchSingleTop = true
                 }
