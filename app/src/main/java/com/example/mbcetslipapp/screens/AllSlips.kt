@@ -22,27 +22,6 @@ import com.example.mbcetslipapp.data.AllSlips
 import com.example.mbcetslipapp.model.Slip
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MBCETSlipAppTheme() {
-
-
-                PTrackerApp()
-
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PTrackerAppCardPreview() {
-    MBCETSlipAppTheme {
-        PTrackerAppList(ptrackerapplist=AllSlips().loadSlips())
-    }
-}
 
 @Composable
 fun PTrackerApp(){
@@ -143,7 +122,7 @@ fun PTrackerAppCard(slip:Slip , modifier: Modifier=Modifier) {
 }
 
 @Composable
-private fun PTrackerAppList(ptrackerapplist :List<Slip>,modifier: Modifier = Modifier) {
+fun PTrackerAppList(ptrackerapplist :List<Slip>,modifier: Modifier = Modifier) {
     Scaffold(topBar = { TopBar() }) {
 
         LazyColumn(){
