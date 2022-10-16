@@ -1,5 +1,4 @@
 package com.example.mbcetslipapp.screens
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -125,7 +124,7 @@ fun PTrackerAppCardstd(slip: com.example.mbcetslipapp.model.Slip, modifier: Modi
 }
 
 @Composable
-private fun PTrackerAppListstd(ptrackerapplist :List<com.example.mbcetslipapp.model.Slip>, modifier: Modifier = Modifier) {
+fun PTrackerAppListstd(ptrackerapplist :List<com.example.mbcetslipapp.model.Slip>, modifier: Modifier = Modifier) {
     Scaffold(topBar = { TopBarstd() }) {
 
         LazyColumn(){
