@@ -52,6 +52,11 @@ fun LoginAndRegistration() {
             "home",
             content = { SlipHome() }
         )
+
+        composable(
+            "login",
+            content = { Login() }
+        )
     })
 }
 
