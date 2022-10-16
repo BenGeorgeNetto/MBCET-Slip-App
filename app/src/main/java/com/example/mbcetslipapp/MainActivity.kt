@@ -12,10 +12,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.mbcetslipapp.screens.CreateSlipLayout
-import com.example.mbcetslipapp.screens.IdCard
-import com.example.mbcetslipapp.screens.PermissionScreen
-import com.example.mbcetslipapp.screens.ItmsWifiSlip
+import com.example.mbcetslipapp.screens.HomeScreenStudent
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,8 +23,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    PermissionScreen()
-                    ItmsWifiSlip()
+                    SlipApp()
                 }
             }
         }
@@ -37,20 +33,19 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SlipApp() {
-    SlipHome()
+    Scaffold(
+        modifier = Modifier
+            .background(MaterialTheme.colors.background),
+//        topBar = { SlipHomeTopBar() }
+    ) {
+        SlipHome()
+    }
 }
 
 
 @Composable
 fun SlipHome() {
-
-    Scaffold(
-        modifier = Modifier
-            .background(MaterialTheme.colors.background)
-    ) {
-        IdCard()
-    }
-
+    HomeScreenStudent()
 }
 
 @Preview(showSystemUi = true)
@@ -61,10 +56,6 @@ fun LightPreview() {
     }
 }
 
-@Composable
-fun TopAppBar() {
-    // to define top app bar
-}
 
 @Composable
 fun BottomNavBar() {
@@ -78,3 +69,25 @@ fun DarkPreview() {
         SlipApp()
     }
 }
+
+//@Composable
+//fun SlipHomeTopBar() {
+//    TopAppBar(
+//        backgroundColor = MaterialTheme.colors.background,
+//        contentColor = MaterialTheme.colors.onBackground,
+//        title = {
+//            Text(
+//                text = stringResource(id = R.string.app_name)
+//            )
+//        },
+////        navigationIcon = {
+////            IconButton(onClick = { }) {
+////                Icon(
+////                    Icons.Filled.ArrowBack,
+////                    contentDescription = "back",
+////                )
+////            }
+////        },
+//        elevation = 12.dp
+//    )
+//}

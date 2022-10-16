@@ -93,8 +93,8 @@ fun PTrackerAppCard(slip:Slip , modifier: Modifier=Modifier) {
     var expanded by remember { mutableStateOf(false) }
     Card(modifier = modifier.padding(30.dp), elevation = 7.dp) {
         Column {
-            androidx.compose.foundation.layout.Row(
-                modifier = androidx.compose.ui.Modifier
+            Row(
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
