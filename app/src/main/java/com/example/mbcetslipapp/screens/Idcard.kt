@@ -126,7 +126,7 @@ fun IdCard() {
     val shape = RoundedCornerShape(25.dp, 25.dp, 20.dp, 20.dp)
     val image = painterResource(R.drawable.qr)
     val imgpad: Dp by animateDpAsState(
-        if (expanded) 450.dp else 0.dp,
+        if (expanded) 450.dp else -2.dp,
         tween(1000, easing = LinearOutSlowInEasing)
     )
     val pad: Dp by animateDpAsState(
