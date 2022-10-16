@@ -1,5 +1,6 @@
 package com.example.mbcetslipapp.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -33,64 +34,58 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mbcetslipapp.R
 import com.example.mbcetslipapp.SlipViewModel
+import com.example.mbcetslipapp.data.Slip
+import com.example.mbcetslipapp.data.slips
 import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 import java.text.SimpleDateFormat
+
 import java.util.*
 
-
+@Preview(showSystemUi = true)
 @Composable
-fun SlipCreateTopBar() {
-    TopAppBar(
-        backgroundColor = MaterialTheme.colors.background,
-        contentColor = MaterialTheme.colors.onBackground,
-        title = {
-            Text(
-                text = stringResource(R.string.CreateASlip),
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = { }) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = "back",
-                )
-            }
-        },
-        elevation = 12.dp
-    )
+fun CreateSlipLightPreview() {
+    MBCETSlipAppTheme {
+        CreateSlipLayout()
+    }
 }
 
+@Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CreateSlipDarkPreview() {
+    MBCETSlipAppTheme {
+        CreateSlipLayout()
+    }
+}
 
 @Composable
 fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
     val scroll = rememberScrollState(0)
     Scaffold(
         topBar = { SlipCreateTopBar() },
-        backgroundColor = MaterialTheme.colors.background,
-        ) {
+        backgroundColor = Color(0xFF333333),
+    ) {
         Card(
-            elevation = 12.dp,
+            backgroundColor = Color(0xFF333333),
             modifier = Modifier
-                .verticalScroll(scroll, reverseScrolling = true)
-                .padding(all = 20.dp)
-                .clip(RoundedCornerShape(20.dp))
                 .fillMaxSize()
-
-        ) {
+                .padding(all = 20.dp)
+            ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .fillMaxSize()
-                    .padding(horizontal = 20.dp),
+                    .background(color = MaterialTheme.colors.secondary)
+                    .clip(RoundedCornerShape(40.dp))
+                    .padding(horizontal = 20.dp)
+                    .verticalScroll(scroll, reverseScrolling = true)
             ) {
+                Spacer(modifier = Modifier.height(10.dp))
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 20.dp)
                 ) {
-                    TypeSelectorDropdown()
+                    TypeSelectorDropdown(model)
                     val sdf = SimpleDateFormat("dd/MM/yyyy")
                     val currentDateAndTime = sdf.format(Date())
                     Box(
@@ -191,18 +186,19 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                 }
                 Spacer(modifier = Modifier.height(30.dp))
                 val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-                val bg =MaterialTheme.colors.background
-                val bg2=MaterialTheme.colors.onSurface
+                val bg = Color(0xFF333333)
+                val bg2 = Color.Black
+
                 Canvas(
                     Modifier
                         .fillMaxWidth()
                         .height(10.dp)
                 ) {
-                    drawCircle(bg, 50f, center = Offset(-50f, 0f))
-                    drawCircle(bg, 50f, center = Offset(size.width + 50f, 0f))
+                    drawCircle(bg, 100f, center = Offset(-100f, 0f))
+                    drawCircle(bg, 100f, center = Offset(size.width + 100f, 0f))
                     drawLine(
                         color = bg2,
-                        strokeWidth = 20f,
+                        strokeWidth = 30f,
                         start = Offset(0f, 0f),
                         end = Offset(size.width, 0f),
                         pathEffect = pathEffect
@@ -220,11 +216,34 @@ fun CreateSlipLayout(model: SlipViewModel = viewModel()) {
                         .fillMaxWidth()
                         .padding(horizontal = 10.dp)
                 )
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
             }
         }
     }
 }
+
+//Components
+@Composable
+fun SlipCreateTopBar() {
+    TopAppBar(
+        backgroundColor = Color(0xFF333333),
+        contentColor = Color(0xFFF2F2F2),
+        title = {
+            Text(
+                text = stringResource(R.string.CreateASlip),
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { }) {
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    contentDescription = "back",
+                )
+            }
+        },
+    )
+}
+
 
 @Composable
 fun AppTextField(
@@ -248,12 +267,13 @@ fun AppTextField(
         keyboardActions = keyBoardActions,
         enabled = isEnabled,
         colors = TextFieldDefaults.outlinedTextFieldColors(
+            unfocusedBorderColor = Color.Gray,
             focusedBorderColor = MaterialTheme.colors.primary,
             disabledBorderColor = Color.Gray,
             disabledTextColor = Color.Black
         ),
         placeholder = {
-            Text(text = placeholder, style = TextStyle(fontSize = 18.sp))
+            Text(text = placeholder, style = TextStyle(fontSize = 18.sp, color = Color.Gray))
         }
     )
 }
@@ -261,14 +281,13 @@ fun AppTextField(
 
 
 @Composable
-fun TypeSelectorDropdown() {
+fun TypeSelectorDropdown(viewModel: SlipViewModel) {
     var expanded by remember { mutableStateOf(false) }
-    var selected: String? by remember { mutableStateOf(null) }
 
     Box {
         Button(onClick = { expanded = true }) {
             Text(
-                text = selected ?: "Select Type",
+                text = stringResource(viewModel.slipType),
             )
             Spacer(Modifier.size(ButtonDefaults.IconSpacing))
             Icon(
@@ -284,37 +303,37 @@ fun TypeSelectorDropdown() {
         ) {
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Gate Pass"
+                viewModel.slipType = R.string.GatePass
             }) {
                 Text(stringResource(R.string.GatePass))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "ID Card Duplicate"
+                viewModel.slipType = R.string.IDCardDuplicate
             }) {
                 Text(stringResource(R.string.IDCardDuplicate))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Lab access request"
+                viewModel.slipType = R.string.LabAccessRequest
             }) {
                 Text(stringResource(R.string.LabAccessRequest))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Extra class request"
+                viewModel.slipType = R.string.ExtraClassRequest
             }) {
-                Text("Extra class request")
+                Text(stringResource(R.string.ExtraClassRequest))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Exam Grievances"
+                viewModel.slipType = R.string.ExamGrievances
             }) {
                 Text(stringResource(R.string.ExamGrievances))
             }
             DropdownMenuItem(onClick = {
                 expanded = false
-                selected = "Misc"
+                viewModel.slipType = R.string.Misc
             }) {
                 Text(stringResource(R.string.Misc))
             }
@@ -364,46 +383,63 @@ fun InputFields(
         fontWeight = FontWeight.Bold,
         color = Color.Gray
     )
-    Row() {
+    Row {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(
                 checked = viewModel.sendToHOD,
                 onCheckedChange = { viewModel.sendToHOD = it },
                 enabled = true,
-                colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
+                colors = CheckboxDefaults.colors(
+                    checkedColor = Color.DarkGray,
+                    uncheckedColor = Color.DarkGray,
+                    checkmarkColor = MaterialTheme.colors.primary
+                )
             )
-            Text(text = stringResource(R.string.HOD), fontWeight = FontWeight.Bold,)
+            Text(text = stringResource(R.string.HOD), fontWeight = FontWeight.Bold)
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
-            val sendToAdvisors = remember { mutableStateOf(false) }
-
             Checkbox(
                 checked = viewModel.sendToAdvisors,
                 onCheckedChange = { viewModel.sendToAdvisors = it },
                 enabled = true,
-                colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
+                colors = CheckboxDefaults.colors(
+                    checkedColor = Color.DarkGray,
+                    uncheckedColor = Color.DarkGray,
+                    checkmarkColor = MaterialTheme.colors.primary
+                )
             )
-            Text(text = stringResource(R.string.Advisors), fontWeight = FontWeight.Bold,)
+            Text(text = stringResource(R.string.Advisors), fontWeight = FontWeight.Bold)
         }
     }
 
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+            val deptHOD = R.string.hod_cs
+            val classAdvisors = listOf(R.string.advisor_1, R.string.advisor_2, R.string.advisor_3)
+
+//            if(viewModel.sendToHOD) {
+//                var deptHOD = R.string.hod_cs
+//            }
+//            if(viewModel.sendToAdvisors) {
+//                var classAdvisors = listOf(R.string.advisor_1, R.string.advisor_2, R.string.advisor_3)
+//            }
+            slips.add(Slip(
+                name= R.string.id_name,
+                slipType = viewModel.slipType,
+                className = R.string.CS1,
+                HoD = deptHOD,
+                advisors = classAdvisors,
+                semester = R.string.semester,
+                rollNo = R.string.id,
+                title = viewModel.title,
+                slipDescribe = viewModel.description))
+        },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 30.dp)
             .height(40.dp)
     ) {
         Text(text = stringResource(R.string.SubmitButtomText),
-        fontSize = 20.sp)
+            fontSize = 20.sp)
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun CreateSlipLightPreview() {
-    MBCETSlipAppTheme {
-        CreateSlipLayout()
-    }
-}
-
