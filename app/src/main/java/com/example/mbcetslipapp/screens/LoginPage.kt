@@ -132,7 +132,7 @@ fun ForgotPasswordButton() {
 }
 
 @Composable
-fun LoginPage(listSlipViewModel: ListSlipViewModel = viewModel()) {
+fun LoginPage(listSlipViewModel: ListSlipViewModel = viewModel()): ListSlipViewModel {
     val slipUiState by listSlipViewModel.uiState.collectAsState()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -165,6 +165,7 @@ fun LoginPage(listSlipViewModel: ListSlipViewModel = viewModel()) {
 
         Spacer(modifier = Modifier.height(128.dp))
     }
+    return listSlipViewModel
 }
 
 @Preview(showSystemUi = true)
