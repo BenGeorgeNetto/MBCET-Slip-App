@@ -20,9 +20,9 @@ import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 
 @Composable
-fun PTrackerApp(){
+fun MBCETApp(){
     MBCETSlipAppTheme{
-        PTrackerAppList(ptrackerapplist = AllSlips().loadSlips())
+        MBCETAppList(mbcetapplist = AllSlips().loadSlips())
 
     }
 }
@@ -64,7 +64,7 @@ fun SlipDetails(slip: Slip,modifier: Modifier=Modifier){
     Spacer(modifier = Modifier.height(10.dp))
 }
 @Composable
-fun PTrackerAppCard(slip:Slip , modifier: Modifier=Modifier) {
+fun MBCETAppCard(slip:Slip , modifier: Modifier=Modifier) {
     var expanded by remember { mutableStateOf(false) }
     Card(modifier = modifier.padding(30.dp), elevation = 7.dp) {
         Column {
@@ -118,12 +118,12 @@ fun PTrackerAppCard(slip:Slip , modifier: Modifier=Modifier) {
 }
 
 @Composable
-fun PTrackerAppList(ptrackerapplist :List<Slip>,modifier: Modifier = Modifier) {
+fun MBCETAppList(mbcetapplist :List<Slip>,modifier: Modifier = Modifier) {
     Scaffold(topBar = { TopBar() }) {
 
         LazyColumn(){
-            items(ptrackerapplist){ slip->
-                PTrackerAppCard(slip)
+            items(mbcetapplist){ slip->
+                MBCETAppCard(slip)
             }
         }
     }

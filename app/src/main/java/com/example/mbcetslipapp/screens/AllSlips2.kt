@@ -20,16 +20,16 @@ import com.example.mbcetslipapp.ui.theme.MBCETSlipAppTheme
 
 @Preview(showBackground = true)
 @Composable
-fun PTrackerAppCardPreviewstd() {
+fun MBCETCardPreviewstd() {
     MBCETSlipAppTheme() {
-        PTrackerAppListstd(ptrackerapplist=AllSlips().loadSlips())
+        MBCETAppListstd(mbcetapplist=AllSlips().loadSlips())
     }
 }
 
 @Composable
-fun PTrackerAppstd(){
+fun MBCETAppstd(){
     MBCETSlipAppTheme() {
-        PTrackerAppListstd(ptrackerapplist = AllSlips().loadSlips())
+        MBCETAppListstd(mbcetapplist = AllSlips().loadSlips())
 
     }
 }
@@ -76,7 +76,7 @@ fun SlipDetailsstd(slip: com.example.mbcetslipapp.model.Slip, modifier: Modifier
     Spacer(modifier = Modifier.height(10.dp))
 }
 @Composable
-fun PTrackerAppCardstd(slip: com.example.mbcetslipapp.model.Slip, modifier: Modifier=Modifier) {
+fun MBCETAppCardstd(slip: com.example.mbcetslipapp.model.Slip, modifier: Modifier=Modifier) {
     var expanded by remember { mutableStateOf(false) }
     Card(modifier = modifier.padding(30.dp), elevation = 7.dp) {
         Column {
@@ -120,12 +120,12 @@ fun PTrackerAppCardstd(slip: com.example.mbcetslipapp.model.Slip, modifier: Modi
 }
 
 @Composable
-fun PTrackerAppListstd(ptrackerapplist :List<com.example.mbcetslipapp.model.Slip>, modifier: Modifier = Modifier) {
+fun MBCETAppListstd(mbcetapplist :List<com.example.mbcetslipapp.model.Slip>, modifier: Modifier = Modifier) {
     Scaffold(topBar = { TopBarstd() }) {
 
         LazyColumn(){
-            items(ptrackerapplist){ slip->
-                PTrackerAppCardstd(slip)
+            items(mbcetapplist){ slip->
+                MBCETAppCardstd(slip)
             }
         }
     }
